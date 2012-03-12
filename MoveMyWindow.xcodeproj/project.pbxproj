@@ -12,6 +12,7 @@
 		BB2B6759150DFFB30035A794 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6758150DFFB30035A794 /* menuIcon.png */; };
 		BB2B6761150E71A40035A794 /* keys1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6760150E71A40035A794 /* keys1.png */; };
 		BB2B6763150E74E00035A794 /* keys2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6762150E74E00035A794 /* keys2.png */; };
+		BB4BF3C9150E92BC00374B02 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = BB4BF3C8150E92BC00374B02 /* menu.png */; };
 		BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */; };
 		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
 		BBFE8906150DEBE5006D4F71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8905150DEBE5006D4F71 /* main.m */; };
@@ -26,6 +27,7 @@
 		BB2B6758150DFFB30035A794 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		BB2B6760150E71A40035A794 /* keys1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys1.png; sourceTree = "<group>"; };
 		BB2B6762150E74E00035A794 /* keys2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys2.png; sourceTree = "<group>"; };
+		BB4BF3C8150E92BC00374B02 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
 		BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveMyWindow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BBFE88FC150DEBE5006D4F71 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -111,6 +113,7 @@
 		BBFE8900150DEBE5006D4F71 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BB4BF3C8150E92BC00374B02 /* menu.png */,
 				BB2B6762150E74E00035A794 /* keys2.png */,
 				BB2B6760150E71A40035A794 /* keys1.png */,
 				BB2B6758150DFFB30035A794 /* menuIcon.png */,
@@ -181,6 +184,7 @@
 				BB2B6759150DFFB30035A794 /* menuIcon.png in Resources */,
 				BB2B6761150E71A40035A794 /* keys1.png in Resources */,
 				BB2B6763150E74E00035A794 /* keys2.png in Resources */,
+				BB4BF3C9150E92BC00374B02 /* menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

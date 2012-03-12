@@ -51,7 +51,7 @@ static bool amIAuthorized (){
     [_statusItem setEnabled:YES];
     [_statusItem setMenu:menu];
 	[_statusItem setTarget:self];	
-	[_statusItem setImage:[NSImage imageNamed:@"menuIcon.png"]];
+	[_statusItem setImage:[NSImage imageNamed:@"menu.png"]];
 	[self registerKeys];
 	lastAbsoluteMove = nil;
 	timeoutTimer = nil;
