@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB02265E150DFA0F00D05242 /* DDHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */; };
+		BB2B6757150DFEEB0035A794 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6756150DFEEB0035A794 /* icon.icns */; };
+		BB2B6759150DFFB30035A794 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6758150DFFB30035A794 /* menuIcon.png */; };
+		BB2B6761150E71A40035A794 /* keys1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6760150E71A40035A794 /* keys1.png */; };
+		BB2B6763150E74E00035A794 /* keys2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6762150E74E00035A794 /* keys2.png */; };
+		BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */; };
+		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
+		BBFE8906150DEBE5006D4F71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8905150DEBE5006D4F71 /* main.m */; };
+		BBFE890A150DEBE5006D4F71 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8908150DEBE5006D4F71 /* Credits.rtf */; };
+		BBFE890D150DEBE5006D4F71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE890C150DEBE5006D4F71 /* AppDelegate.m */; };
+		BBFE8910150DEBE5006D4F71 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBFE890E150DEBE5006D4F71 /* MainMenu.xib */; };
+		BBFE891B150DEC42006D4F71 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE891A150DEC42006D4F71 /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BB2B6756150DFEEB0035A794 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		BB2B6758150DFFB30035A794 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
+		BB2B6760150E71A40035A794 /* keys1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys1.png; sourceTree = "<group>"; };
+		BB2B6762150E74E00035A794 /* keys2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys2.png; sourceTree = "<group>"; };
+		BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveMyWindow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		BBFE88FC150DEBE5006D4F71 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		BBFE88FD150DEBE5006D4F71 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BBFE88FE150DEBE5006D4F71 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BBFE8901150DEBE5006D4F71 /* MoveMyWindow-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MoveMyWindow-Info.plist"; sourceTree = "<group>"; };
+		BBFE8903150DEBE5006D4F71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BBFE8905150DEBE5006D4F71 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BBFE8907150DEBE5006D4F71 /* MoveMyWindow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoveMyWindow-Prefix.pch"; sourceTree = "<group>"; };
+		BBFE8909150DEBE5006D4F71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		BBFE890B150DEBE5006D4F71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BBFE890C150DEBE5006D4F71 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BBFE890F150DEBE5006D4F71 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BBFE891A150DEC42006D4F71 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		BBFE8921150DF53C006D4F71 /* DDHotKeyCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHotKeyCenter.h; sourceTree = "<group>"; };
+		BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyCenter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BBFE88F2150DEBE5006D4F71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBFE891B150DEC42006D4F71 /* Carbon.framework in Frameworks */,
+				BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BBFE88EA150DEBE4006D4F71 = {
+			isa = PBXGroup;
+			children = (
+				BBFE88FF150DEBE5006D4F71 /* TheWindower */,
+				BBFE88F8150DEBE5006D4F71 /* Frameworks */,
+				BBFE88F6150DEBE5006D4F71 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BBFE88F6150DEBE5006D4F71 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BBFE88F8150DEBE5006D4F71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBFE891A150DEC42006D4F71 /* Carbon.framework */,
+				BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */,
+				BBFE88FB150DEBE5006D4F71 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BBFE88FB150DEBE5006D4F71 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BBFE88FC150DEBE5006D4F71 /* AppKit.framework */,
+				BBFE88FD150DEBE5006D4F71 /* CoreData.framework */,
+				BBFE88FE150DEBE5006D4F71 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		BBFE88FF150DEBE5006D4F71 /* TheWindower */ = {
+			isa = PBXGroup;
+			children = (
+				BBFE8921150DF53C006D4F71 /* DDHotKeyCenter.h */,
+				BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */,
+				BBFE890B150DEBE5006D4F71 /* AppDelegate.h */,
+				BBFE890C150DEBE5006D4F71 /* AppDelegate.m */,
+				BBFE890E150DEBE5006D4F71 /* MainMenu.xib */,
+				BBFE8900150DEBE5006D4F71 /* Supporting Files */,
+			);
+			name = TheWindower;
+			path = WindowMover;
+			sourceTree = "<group>";
+		};
+		BBFE8900150DEBE5006D4F71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BB2B6762150E74E00035A794 /* keys2.png */,
+				BB2B6760150E71A40035A794 /* keys1.png */,
+				BB2B6758150DFFB30035A794 /* menuIcon.png */,
+				BB2B6756150DFEEB0035A794 /* icon.icns */,
+				BBFE8901150DEBE5006D4F71 /* MoveMyWindow-Info.plist */,
+				BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */,
+				BBFE8905150DEBE5006D4F71 /* main.m */,
+				BBFE8907150DEBE5006D4F71 /* MoveMyWindow-Prefix.pch */,
+				BBFE8908150DEBE5006D4F71 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BBFE88F4150DEBE5006D4F71 /* MoveMyWindow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BBFE8913150DEBE5006D4F71 /* Build configuration list for PBXNativeTarget "MoveMyWindow" */;
+			buildPhases = (
+				BBFE88F1150DEBE5006D4F71 /* Sources */,
+				BBFE88F2150DEBE5006D4F71 /* Frameworks */,
+				BBFE88F3150DEBE5006D4F71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MoveMyWindow;
+			productName = WindowMover;
+			productReference = BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BBFE88EC150DEBE4006D4F71 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = BBFE88EF150DEBE4006D4F71 /* Build configuration list for PBXProject "MoveMyWindow" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BBFE88EA150DEBE4006D4F71;
+			productRefGroup = BBFE88F6150DEBE5006D4F71 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BBFE88F4150DEBE5006D4F71 /* MoveMyWindow */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BBFE88F3150DEBE5006D4F71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */,
+				BBFE890A150DEBE5006D4F71 /* Credits.rtf in Resources */,
+				BBFE8910150DEBE5006D4F71 /* MainMenu.xib in Resources */,
+				BB2B6757150DFEEB0035A794 /* icon.icns in Resources */,
+				BB2B6759150DFFB30035A794 /* menuIcon.png in Resources */,
+				BB2B6761150E71A40035A794 /* keys1.png in Resources */,
+				BB2B6763150E74E00035A794 /* keys2.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BBFE88F1150DEBE5006D4F71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB02265E150DFA0F00D05242 /* DDHotKeyCenter.m in Sources */,
+				BBFE8906150DEBE5006D4F71 /* main.m in Sources */,
+				BBFE890D150DEBE5006D4F71 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBFE8903150DEBE5006D4F71 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BBFE8908150DEBE5006D4F71 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBFE8909150DEBE5006D4F71 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		BBFE890E150DEBE5006D4F71 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BBFE890F150DEBE5006D4F71 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BBFE8911150DEBE5006D4F71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BBFE8912150DEBE5006D4F71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BBFE8914150DEBE5006D4F71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
+				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
+				PRODUCT_NAME = MoveMyWindow;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BBFE8915150DEBE5006D4F71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
+				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
+				PRODUCT_NAME = MoveMyWindow;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BBFE88EF150DEBE4006D4F71 /* Build configuration list for PBXProject "MoveMyWindow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBFE8911150DEBE5006D4F71 /* Debug */,
+				BBFE8912150DEBE5006D4F71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BBFE8913150DEBE5006D4F71 /* Build configuration list for PBXNativeTarget "MoveMyWindow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BBFE8914150DEBE5006D4F71 /* Debug */,
+				BBFE8915150DEBE5006D4F71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BBFE88EC150DEBE4006D4F71 /* Project object */;
+}
