@@ -43,14 +43,13 @@ static bool amIAuthorized (){
 
 @implementation AppDelegate
 
-@synthesize menu = _menu;
 
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	_statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
     [_statusItem setHighlightMode:YES];
     [_statusItem setEnabled:YES];
-    [_statusItem setMenu:_menu];
+    [_statusItem setMenu:menu];
 	[_statusItem setTarget:self];	
 	[_statusItem setImage:[NSImage imageNamed:@"menuIcon.png"]];
 	[self registerKeys];

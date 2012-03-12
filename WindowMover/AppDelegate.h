@@ -16,6 +16,7 @@
 	NSStatusItem*	_statusItem;
 	NSString * lastAbsoluteMove;
 	NSTimer * timeoutTimer;
+	IBOutlet NSMenu * menu;
 
 }
 
