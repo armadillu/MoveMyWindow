@@ -83,7 +83,7 @@
         <int key="NSWindowBacking">2</int>
         <string key="NSWindowRect">{{653, 403}, {483, 377}}</string>
         <int key="NSWTFlags">1685586944</int>
-        <string key="NSWindowTitle">Windower Instructions</string>
+        <string key="NSWindowTitle">MoveMyWindow Instructions</string>
         <string key="NSWindowClass">NSPanel</string>
         <nil key="NSViewClass"/>
         <nil key="NSUserInterfaceItemIdentifier"/>
