@@ -17,6 +17,9 @@
 	NSString * lastAbsoluteMove;
 	NSTimer * timeoutTimer;
 	IBOutlet NSMenu * menu;
+	IBOutlet NSSlider * offsetSlider;
+	
+	float offset;
 
 }
 
@@ -24,8 +27,9 @@
 -(IBAction)moveDown:(id)sender;
 -(IBAction)moveRight:(id)sender;
 -(IBAction)moveLeft:(id)sender;
-
 -(IBAction)pushUp:(id)sender;
+
+-(IBAction)changeOffset:(id)sender;
 
 - (void) registerKeys;
 - (void) unregisterKeys;

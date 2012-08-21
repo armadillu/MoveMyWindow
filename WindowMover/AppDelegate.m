@@ -55,6 +55,17 @@ static bool amIAuthorized (){
 	[self registerKeys];
 	lastAbsoluteMove = nil;
 	timeoutTimer = nil;
+	offset = 100; //defaults
+	[self loadPrefs];
+	[offsetSlider setFloatValue:offset];
+}
+
+
+-(void)loadPrefs{
+	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+	if ( [def stringForKey:@"offset"] ){
+		offset = [def floatForKey:@"offset"] ;
+	}
 }
 
 
@@ -64,6 +75,13 @@ static bool amIAuthorized (){
 }
 
 
+-(IBAction)changeOffset:(id)sender{
+	offset = [sender floatValue];
+	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+	[def setFloat:offset forKey:@"offset"];
+	[def synchronize];
+}
+
 -(void)timeOut{
 	
 	NSLog(@"timeOut...");
@@ -71,6 +89,7 @@ static bool amIAuthorized (){
 		lastAbsoluteMove = nil;
 	timeoutTimer = nil;
 }
+
 
 -(void)moveWindow:(NSDictionary*)offset{
 
@@ -284,7 +303,7 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 		[NSNumber numberWithBool:true], @"relative", 
 		[NSNumber numberWithInt:0], @"x", 
-		[NSNumber numberWithInt:-100], @"y", nil]
+		[NSNumber numberWithInt:-offset], @"y", nil]
 			   afterDelay:0.00];
 }
 
@@ -293,7 +312,7 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
 	  [NSNumber numberWithInt:0], @"x", 
-	  [NSNumber numberWithInt:100], @"y", nil]
+	  [NSNumber numberWithInt:offset], @"y", nil]
 			   afterDelay:0.00];
 }
 
@@ -301,7 +320,7 @@ float flip(float val) {
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
-	  [NSNumber numberWithInt:100], @"x", 
+	  [NSNumber numberWithInt:offset], @"x", 
 	  [NSNumber numberWithInt:00], @"y", nil]
 			   afterDelay:0.00];
 }
@@ -310,7 +329,7 @@ float flip(float val) {
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
-	  [NSNumber numberWithInt:-100], @"x", 
+	  [NSNumber numberWithInt:-offset], @"x", 
 	  [NSNumber numberWithInt:0], @"y", nil]
 			   afterDelay:0.00];
 }
