@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB015D9216013AC300E76171 /* keys3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB015D9116013AC300E76171 /* keys3.png */; };
 		BB02265E150DFA0F00D05242 /* DDHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */; };
 		BB2B6757150DFEEB0035A794 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6756150DFEEB0035A794 /* icon.icns */; };
 		BB2B6759150DFFB30035A794 /* menuIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB2B6758150DFFB30035A794 /* menuIcon.png */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BB015D9116013AC300E76171 /* keys3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys3.png; sourceTree = "<group>"; };
 		BB2B6756150DFEEB0035A794 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		BB2B6758150DFFB30035A794 /* menuIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuIcon.png; sourceTree = "<group>"; };
 		BB2B6760150E71A40035A794 /* keys1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys1.png; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				BB4BF3C8150E92BC00374B02 /* menu.png */,
+				BB015D9116013AC300E76171 /* keys3.png */,
 				BB2B6762150E74E00035A794 /* keys2.png */,
 				BB2B6760150E71A40035A794 /* keys1.png */,
 				BB2B6758150DFFB30035A794 /* menuIcon.png */,
@@ -185,6 +188,7 @@
 				BB2B6761150E71A40035A794 /* keys1.png in Resources */,
 				BB2B6763150E74E00035A794 /* keys2.png in Resources */,
 				BB4BF3C9150E92BC00374B02 /* menu.png in Resources */,
+				BB015D9216013AC300E76171 /* keys3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -84,12 +84,70 @@ static bool amIAuthorized (){
 
 -(void)timeOut{
 	
-	NSLog(@"timeOut...");
+	//NSLog(@"timeOut...");
 	if (lastAbsoluteMove!= nil) [lastAbsoluteMove release];
 		lastAbsoluteMove = nil;
 	timeoutTimer = nil;
 }
 
+-(void)resizeWindow:(NSDictionary*)offset{
+
+    AXValueRef temp;
+    CGSize windowSize;
+    CGPoint windowPosition;
+    AXUIElementRef frontMostApp;
+    AXUIElementRef frontMostWindow;
+
+    if (!amIAuthorized()) {
+        printf("Can't use accessibility API!\n");
+        return ;
+    }
+
+    frontMostApp = getFrontMostApp();
+    AXUIElementCopyAttributeValue( frontMostApp, kAXFocusedWindowAttribute, (CFTypeRef *)&frontMostWindow );
+
+	if (frontMostWindow == nil){
+		NSLog(@"Can't get FrontMost Window!");
+		return;
+	}
+
+    AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
+	if (temp == nil){
+		NSLog(@"Can't get FrontMost Window position!");
+		return;
+	}
+
+    AXValueGetValue(temp, kAXValueCGSizeType, &windowSize);
+    CFRelease(temp);
+    AXUIElementCopyAttributeValue( frontMostWindow, kAXPositionAttribute, (CFTypeRef *)&temp );
+    AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
+    CFRelease(temp);
+
+	//NSLog(@"current window position %f %f", windowPosition.x, windowPosition.y);
+	//NSLog(@"current window size %f %f", windowSize.width, windowSize.height);
+	//NSLog(@"offset: %@",offset);
+
+	windowSize.width += [[offset objectForKey:@"x"] intValue];
+	windowSize.height += [[offset objectForKey:@"y"] intValue];
+
+
+	AXError err;
+
+	temp = AXValueCreate(kAXValueCGPointType, &windowPosition);
+	err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+	//printf("err at set position %d\n", err);
+    CFRelease(temp);
+
+	windowSize.width = (int)windowSize.width;
+	windowSize.height = (int)windowSize.height;
+	temp = AXValueCreate(kAXValueCGSizeType, &windowSize);
+    err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+	//printf("err at set size %d\n", err);
+    CFRelease(temp);
+
+    CFRelease(frontMostWindow);
+    CFRelease(frontMostApp);
+}
 
 -(void)moveWindow:(NSDictionary*)offset{
 
@@ -99,7 +157,6 @@ static bool amIAuthorized (){
     AXValueRef temp;
     CGSize windowSize;
     CGPoint windowPosition;
-    CFStringRef windowTitle;
     AXUIElementRef frontMostApp;
     AXUIElementRef frontMostWindow;
 	
@@ -116,11 +173,6 @@ static bool amIAuthorized (){
 		return;
 	}
 	
-    AXUIElementCopyAttributeValue( frontMostWindow, kAXTitleAttribute, (CFTypeRef *)&windowTitle );
-	if (windowTitle == nil){ 
-		NSLog(@"Can't get FrontMost Window windowTitle!");
-		return;
-	}
     AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
 	if (temp == nil){ 
 		NSLog(@"Can't get FrontMost Window position!");
@@ -189,7 +241,7 @@ static bool amIAuthorized (){
 			
 			if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString:@"N"] ){   // NORTH ////////////////////////
 								
-				NSLog(@"NORTH!");
+				//NSLog(@"NORTH!");
 				if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString: lastAbsoluteMove] ){	//move to next screen
 					//windowSize.width *= ratioX;
 					//windowSize.height *= ratioY;
@@ -201,7 +253,7 @@ static bool amIAuthorized (){
 			}
 
 			if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString:@"S"] ){   // SOUTH ////////////////////////
-				NSLog(@"SOUTH!");
+				//NSLog(@"SOUTH!");
 				if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString: lastAbsoluteMove] ){	//move to next screen
 					//windowSize.width *= ratioX;
 					//windowSize.height *= ratioY;
@@ -216,7 +268,7 @@ static bool amIAuthorized (){
 			}
 			
 			if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString:@"E"] ){   // EAST ////////////////////////
-				NSLog(@"EAST!");
+				//NSLog(@"EAST!");
 				if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString: lastAbsoluteMove] ){	//move to next screen
 					
 					//NSLog(@"percentY: %f", 0);
@@ -230,7 +282,7 @@ static bool amIAuthorized (){
 			}
 
 			if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString:@"W"] ){   // WEST ////////////////////////
-				NSLog(@"WEST!");
+				//NSLog(@"WEST!");
 				if ( [[offset objectForKey:@"abosolutePosition"] isEqualToString: lastAbsoluteMove] ){	//move to next screen
 					
 					//NSLog(@"percentY: %f", 0);
@@ -281,6 +333,12 @@ float flip(float val) {
 	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushDown:) object:nil];
 	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushLeft:) object:nil];
 	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushRight:) object:nil];
+
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkY:) object:nil];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growY:) object:nil];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkX:) object:nil];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growX:) object:nil];
+
 }
 
 - (void) unregisterKeys{
@@ -294,7 +352,49 @@ float flip(float val) {
 	[keys unregisterHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask];
 	[keys unregisterHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask];
 
+	[keys unregisterHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
+
 	[keys release];
+}
+
+
+-(IBAction)growY:(id)sender;{
+	[self performSelector:@selector(resizeWindow:) withObject:
+	 [NSDictionary dictionaryWithObjectsAndKeys:
+	  [NSNumber numberWithInt:0], @"x",
+	  [NSNumber numberWithInt:offset], @"y",
+	  nil]
+	afterDelay:0.00];
+}
+
+-(IBAction)shrinkY:(id)sender;{
+	[self performSelector:@selector(resizeWindow:) withObject:
+	 [NSDictionary dictionaryWithObjectsAndKeys:
+	  [NSNumber numberWithInt:0], @"x",
+	  [NSNumber numberWithInt:-offset], @"y",
+	  nil]
+   afterDelay:0.00];
+}
+
+-(IBAction)growX:(id)sender;{
+	[self performSelector:@selector(resizeWindow:) withObject:
+	 [NSDictionary dictionaryWithObjectsAndKeys:
+	  [NSNumber numberWithInt:offset], @"x",
+	  [NSNumber numberWithInt:0], @"y",
+	  nil]
+			   afterDelay:0.00];
+}
+
+-(IBAction)shrinkX:(id)sender;{
+	[self performSelector:@selector(resizeWindow:) withObject:
+	 [NSDictionary dictionaryWithObjectsAndKeys:
+	  [NSNumber numberWithInt:-offset], @"x",
+	  [NSNumber numberWithInt:0], @"y",
+	  nil]
+			   afterDelay:0.00];
 }
 
 
