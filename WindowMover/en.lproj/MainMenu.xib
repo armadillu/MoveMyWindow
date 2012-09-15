@@ -160,7 +160,7 @@
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Move by N* pixels</string>
+								<string key="NSContents">Move Frontmost Window</string>
 								<object class="NSFont" key="NSSupport" id="26">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">11</double>
@@ -170,7 +170,7 @@
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
 									<string key="NSColorName">textBackgroundColor</string>
-									<object class="NSColor" key="NSColor">
+									<object class="NSColor" key="NSColor" id="344511073">
 										<int key="NSColorSpace">3</int>
 										<bytes key="NSWhite">MQA</bytes>
 									</object>
@@ -242,7 +242,7 @@
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Move to Edge (press twice to move to next screen)</string>
+								<string key="NSContents">Push Frontmost Window to Edge (press twice to move to next screen)</string>
 								<reference key="NSSupport" ref="26"/>
 								<reference key="NSBackgroundColor" ref="1040354181"/>
 								<object class="NSColor" key="NSTextColor">
@@ -262,7 +262,7 @@
 							<string key="NSFrame">{{140, 0}, {200, 44}}</string>
 							<reference key="NSSuperview" ref="1056625355"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="30054200"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSAntiCompressionPriority">{250, 750}</string>
 							<bool key="NSEnabled">YES</bool>
@@ -290,11 +290,8 @@ IERhdmUgRGVMb25nA</string>
 								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
-									<string key="NSColorName">gridColor</string>
-									<object class="NSColor" key="NSColor">
-										<int key="NSColorSpace">3</int>
-										<bytes key="NSWhite">MC41AA</bytes>
-									</object>
+									<string key="NSColorName">headerColor</string>
+									<reference key="NSColor" ref="344511073"/>
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -302,7 +299,7 @@ IERhdmUgRGVMb25nA</string>
 						<object class="NSSlider" id="130825249">
 							<reference key="NSNextResponder" ref="1056625355"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{282, 54}, {111, 17}}</string>
+							<string key="NSFrame">{{278, 54}, {111, 15}}</string>
 							<reference key="NSSuperview" ref="1056625355"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="1052362118"/>
@@ -314,13 +311,13 @@ IERhdmUgRGVMb25nA</string>
 								<string key="NSContents"/>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="130825249"/>
-								<double key="NSMaxValue">250</double>
-								<double key="NSMinValue">25</double>
-								<double key="NSValue">250</double>
+								<double key="NSMaxValue">50</double>
+								<double key="NSMinValue">1</double>
+								<double key="NSValue">50</double>
 								<double key="NSAltIncValue">0.0</double>
-								<int key="NSNumberOfTickMarks">10</int>
+								<int key="NSNumberOfTickMarks">0</int>
 								<int key="NSTickMarkPosition">0</int>
-								<bool key="NSAllowsTickMarkValuesOnly">YES</bool>
+								<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
 								<bool key="NSVertical">NO</bool>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -338,7 +335,7 @@ IERhdmUgRGVMb25nA</string>
 							<object class="NSTextFieldCell" key="NSCell" id="788139791">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">71565312</int>
-								<string key="NSContents">* Window move/resize pixel Offset:</string>
+								<string key="NSContents">* Window move/resize speed:</string>
 								<object class="NSFont" key="NSSupport">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">12</double>
@@ -347,7 +344,7 @@ IERhdmUgRGVMb25nA</string>
 								<string key="NSCellIdentifier">_NS:9</string>
 								<reference key="NSControlView" ref="344851302"/>
 								<reference key="NSBackgroundColor" ref="338069537"/>
-								<object class="NSColor" key="NSTextColor" id="558586160">
+								<object class="NSColor" key="NSTextColor">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
 									<string key="NSColorName">controlTextColor</string>
@@ -359,52 +356,6 @@ IERhdmUgRGVMb25nA</string>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 							<bool key="NSControlAutosetMaxLayoutWidth">YES</bool>
-						</object>
-						<object class="NSTextField" id="30054200">
-							<reference key="NSNextResponder" ref="1056625355"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{280, 41}, {23, 11}}</string>
-							<reference key="NSSuperview" ref="1056625355"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="376437011"/>
-							<string key="NSReuseIdentifierKey">_NS:1535</string>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="6794470">
-								<int key="NSCellFlags">68157504</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">25</string>
-								<object class="NSFont" key="NSSupport" id="22">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">9</double>
-									<int key="NSfFlags">3614</int>
-								</object>
-								<string key="NSCellIdentifier">_NS:1535</string>
-								<reference key="NSControlView" ref="30054200"/>
-								<reference key="NSBackgroundColor" ref="338069537"/>
-								<reference key="NSTextColor" ref="558586160"/>
-							</object>
-							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-						</object>
-						<object class="NSTextField" id="376437011">
-							<reference key="NSNextResponder" ref="1056625355"/>
-							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{377, 42}, {23, 11}}</string>
-							<reference key="NSSuperview" ref="1056625355"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
-							<string key="NSReuseIdentifierKey">_NS:1535</string>
-							<bool key="NSEnabled">YES</bool>
-							<object class="NSTextFieldCell" key="NSCell" id="94619773">
-								<int key="NSCellFlags">68157504</int>
-								<int key="NSCellFlags2">272630784</int>
-								<string key="NSContents">250</string>
-								<reference key="NSSupport" ref="22"/>
-								<string key="NSCellIdentifier">_NS:1535</string>
-								<reference key="NSControlView" ref="376437011"/>
-								<reference key="NSBackgroundColor" ref="338069537"/>
-								<reference key="NSTextColor" ref="558586160"/>
-							</object>
-							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 						</object>
 						<object class="NSBox" id="600295004">
 							<reference key="NSNextResponder" ref="1056625355"/>
@@ -462,7 +413,7 @@ IERhdmUgRGVMb25nA</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Grow / shrink by N* pixels </string>
+								<string key="NSContents">Grow / shrink Frontmost Window</string>
 								<reference key="NSSupport" ref="26"/>
 								<reference key="NSBackgroundColor" ref="1040354181"/>
 								<object class="NSColor" key="NSTextColor">
@@ -614,8 +565,6 @@ IERhdmUgRGVMb25nA</string>
 							<reference ref="1052362118"/>
 							<reference ref="130825249"/>
 							<reference ref="344851302"/>
-							<reference ref="30054200"/>
-							<reference ref="376437011"/>
 							<reference ref="600295004"/>
 						</array>
 						<reference key="parent" ref="1040745274"/>
@@ -681,58 +630,6 @@ IERhdmUgRGVMb25nA</string>
 						<reference key="parent" ref="1052362118"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">1417</int>
-						<reference key="object" ref="130825249"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="890268243"/>
-						</array>
-						<reference key="parent" ref="1056625355"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1418</int>
-						<reference key="object" ref="344851302"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="788139791"/>
-						</array>
-						<reference key="parent" ref="1056625355"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1419</int>
-						<reference key="object" ref="788139791"/>
-						<reference key="parent" ref="344851302"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1420</int>
-						<reference key="object" ref="890268243"/>
-						<reference key="parent" ref="130825249"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1421</int>
-						<reference key="object" ref="30054200"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="6794470"/>
-						</array>
-						<reference key="parent" ref="1056625355"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1422</int>
-						<reference key="object" ref="6794470"/>
-						<reference key="parent" ref="30054200"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1423</int>
-						<reference key="object" ref="376437011"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="94619773"/>
-						</array>
-						<reference key="parent" ref="1056625355"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1424</int>
-						<reference key="object" ref="94619773"/>
-						<reference key="parent" ref="376437011"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">1427</int>
 						<reference key="object" ref="600295004"/>
 						<array class="NSMutableArray" key="children">
@@ -753,6 +650,32 @@ IERhdmUgRGVMb25nA</string>
 						<reference key="object" ref="702230455"/>
 						<reference key="parent" ref="118684860"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1417</int>
+						<reference key="object" ref="130825249"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="890268243"/>
+						</array>
+						<reference key="parent" ref="1056625355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1420</int>
+						<reference key="object" ref="890268243"/>
+						<reference key="parent" ref="130825249"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1418</int>
+						<reference key="object" ref="344851302"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="788139791"/>
+						</array>
+						<reference key="parent" ref="1056625355"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1419</int>
+						<reference key="object" ref="788139791"/>
+						<reference key="parent" ref="344851302"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -771,10 +694,6 @@ IERhdmUgRGVMb25nA</string>
 				<string key="1418.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1419.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1420.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1421.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1422.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1423.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="1424.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1427.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1428.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1429.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -804,18 +723,26 @@ IERhdmUgRGVMb25nA</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="changeOffset:">id</string>
-						<string key="growX:">id</string>
-						<string key="growY:">id</string>
-						<string key="moveDown:">id</string>
-						<string key="moveLeft:">id</string>
-						<string key="moveRight:">id</string>
-						<string key="moveUp:">id</string>
-						<string key="pushDown:">id</string>
-						<string key="pushLeft:">id</string>
-						<string key="pushRight:">id</string>
-						<string key="pushUp:">id</string>
-						<string key="shrinkX:">id</string>
-						<string key="shrinkY:">id</string>
+						<string key="growX:">NSEvent</string>
+						<string key="growXTrigger:">NSEvent</string>
+						<string key="growY:">NSEvent</string>
+						<string key="growYTrigger:">NSEvent</string>
+						<string key="moveDown:">NSEvent</string>
+						<string key="moveDownTrigger:">NSEvent</string>
+						<string key="moveLeft:">NSEvent</string>
+						<string key="moveLeftTrigger:">NSEvent</string>
+						<string key="moveRight:">NSEvent</string>
+						<string key="moveRightTrigger:">NSEvent</string>
+						<string key="moveUp:">NSEvent</string>
+						<string key="moveUpTrigger:">NSEvent</string>
+						<string key="pushDown:">NSEvent</string>
+						<string key="pushLeft:">NSEvent</string>
+						<string key="pushRight:">NSEvent</string>
+						<string key="pushUp:">NSEvent</string>
+						<string key="shrinkX:">NSEvent</string>
+						<string key="shrinkXTrigger:">NSEvent</string>
+						<string key="shrinkY:">NSEvent</string>
+						<string key="shrinkYTrigger:">NSEvent</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="changeOffset:">
@@ -824,51 +751,83 @@ IERhdmUgRGVMb25nA</string>
 						</object>
 						<object class="IBActionInfo" key="growX:">
 							<string key="name">growX:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="growXTrigger:">
+							<string key="name">growXTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="growY:">
 							<string key="name">growY:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="growYTrigger:">
+							<string key="name">growYTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="moveDown:">
 							<string key="name">moveDown:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveDownTrigger:">
+							<string key="name">moveDownTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="moveLeft:">
 							<string key="name">moveLeft:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveLeftTrigger:">
+							<string key="name">moveLeftTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="moveRight:">
 							<string key="name">moveRight:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveRightTrigger:">
+							<string key="name">moveRightTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="moveUp:">
 							<string key="name">moveUp:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveUpTrigger:">
+							<string key="name">moveUpTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="pushDown:">
 							<string key="name">pushDown:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="pushLeft:">
 							<string key="name">pushLeft:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="pushRight:">
 							<string key="name">pushRight:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="pushUp:">
 							<string key="name">pushUp:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="shrinkX:">
 							<string key="name">shrinkX:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkXTrigger:">
+							<string key="name">shrinkXTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="shrinkY:">
 							<string key="name">shrinkY:</string>
-							<string key="candidateClassName">id</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkYTrigger:">
+							<string key="name">shrinkYTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">

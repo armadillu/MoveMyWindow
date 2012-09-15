@@ -15,7 +15,11 @@
 typedef void (^DDHotKeyTask)(NSEvent*);
 #endif
 
-@interface DDHotKey : NSObject
+@interface DDHotKey : NSObject{
+	int onRelease;
+}
+
+
 
 @property (nonatomic, readonly, retain) id target;
 @property (nonatomic, readonly) SEL action;
@@ -26,6 +30,7 @@ typedef void (^DDHotKeyTask)(NSEvent*);
 
 @property (nonatomic, readonly) unsigned short keyCode;
 @property (nonatomic, readonly) NSUInteger modifierFlags;
+@property (nonatomic) int onRelease;
 
 @end
 
@@ -40,7 +45,7 @@ typedef void (^DDHotKeyTask)(NSEvent*);
  The modifierFlags must be a bitwise OR of NSCommandKeyMask, NSAlternateKeyMask, NSControlKeyMask, or NSShiftKeyMask;
  Returns YES if the hotkey was registered; NO otherwise.
  */
-- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object;
+- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object onRelease:(BOOL) triggerEventOnKeyRelease;
 
 #if NS_BLOCKS_AVAILABLE
 /**
@@ -55,7 +60,7 @@ typedef void (^DDHotKeyTask)(NSEvent*);
  See if a hotkey exists with the specified keycode and modifier flags.
  NOTE: this will only check among hotkeys you have explicitly registered with DDHotKeyCenter. This does not check all globally registered hotkeys.
  */
-- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags;
+- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags onRelease:(int)onRelease;
 
 /**
  Unregister a specific hotkey

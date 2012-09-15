@@ -9,25 +9,40 @@
 #import <Cocoa/Cocoa.h>
 #import "DDHotKeyCenter.h"
 
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
+
+	enum WIN_ACTION{
+		NOTHING = 0,
+		MOVE_L,
+		MOVE_R,
+		MOVE_U,
+		MOVE_D,
+		GROW_L,
+		GROW_R,
+		GROW_U,
+		GROW_D
+	};
 
 	DDHotKeyCenter * keys;
 	
 	NSStatusItem*	_statusItem;
 	NSString * lastAbsoluteMove;
 	NSTimer * timeoutTimer;
+	NSTimer * updateTimer;
 	IBOutlet NSMenu * menu;
 	IBOutlet NSSlider * offsetSlider;
 	
 	float offset;
 
+	enum WIN_ACTION currentAction;
 }
 
--(IBAction)moveUp:(id)sender;
--(IBAction)moveDown:(id)sender;
--(IBAction)moveRight:(id)sender;
--(IBAction)moveLeft:(id)sender;
--(IBAction)pushUp:(id)sender;
+-(IBAction)moveUp:(NSEvent*)sender;
+-(IBAction)moveDown:(NSEvent*)sender;
+-(IBAction)moveRight:(NSEvent*)sender;
+-(IBAction)moveLeft:(NSEvent*)sender;
+-(IBAction)pushUp:(NSEvent*)sender;
 
 -(IBAction)changeOffset:(id)sender;
 

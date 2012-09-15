@@ -58,13 +58,49 @@ static bool amIAuthorized (){
 	offset = 100; //defaults
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
+	currentAction = NOTHING;
+	updateTimer = nil;
 }
 
+
+-(void)update:(id)whatever{
+	//NSLog(@"update");
+	switch (currentAction) {
+		case NOTHING: break;
+		case MOVE_L: [self moveLeft:nil]; break;
+		case MOVE_R: [self moveRight:nil]; break;
+		case MOVE_U: [self moveUp:nil]; break;
+		case MOVE_D: [self moveDown:nil]; break;
+		case GROW_L: [self shrinkX:nil]; break;
+		case GROW_R: [self growX:nil]; break;
+		case GROW_D: [self shrinkY:nil]; break;
+		case GROW_U: [self growY:nil]; break;
+	}
+}
+
+-(void)handleTrigger:(NSEvent*) e{
+	if ([e type] == NSKeyDown){
+		//NSLog(@"handleTirgegr keyDown");
+		if ( updateTimer == nil ){
+			updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(update:) userInfo:nil repeats:YES] ;
+			[updateTimer retain];
+		}
+	}else{
+		//NSLog(@"handleTirgegr keyUp");
+		if ( updateTimer != nil){
+			[updateTimer invalidate];
+			[updateTimer release];
+			updateTimer = nil;
+		}
+	}
+}
 
 -(void)loadPrefs{
 	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
 	if ( [def stringForKey:@"offset"] ){
 		offset = [def floatForKey:@"offset"] ;
+		if (offset > 25) offset = 25;
+		if (offset < 1) offset = 1;
 	}
 }
 
@@ -324,20 +360,20 @@ float flip(float val) {
 - (void) registerKeys{
 	
 	keys = [[DDHotKeyCenter alloc] init];
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveUp:) object:nil];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveDown:) object:nil];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveLeft:) object:nil];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveRight:) object:nil];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveUpTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveDownTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveLeftTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveRightTrigger:) object:nil onRelease:FALSE];
 
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushUp:) object:nil];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushDown:) object:nil];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushLeft:) object:nil];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushRight:) object:nil];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushUp:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushDown:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushLeft:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushRight:) object:nil onRelease:FALSE];
 
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkY:) object:nil];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growY:) object:nil];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkX:) object:nil];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growX:) object:nil];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkYTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growYTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkXTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growXTrigger:) object:nil onRelease:FALSE];
 
 }
 
@@ -361,7 +397,30 @@ float flip(float val) {
 }
 
 
--(IBAction)growY:(id)sender;{
+
+
+-(IBAction)growYTrigger:(NSEvent*)sender;{
+	currentAction = GROW_U;
+	[self handleTrigger:sender];
+}
+
+-(IBAction)shrinkYTrigger:(NSEvent*)sender;{
+	currentAction = GROW_D;
+	[self handleTrigger:sender];
+}
+
+-(IBAction)growXTrigger:(NSEvent*)sender;{
+	currentAction = GROW_R;
+	[self handleTrigger:sender];
+}
+
+-(IBAction)shrinkXTrigger:(NSEvent*)sender;{
+	currentAction = GROW_L;
+	[self handleTrigger:sender];
+}
+
+
+-(IBAction)growY:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:0], @"x",
@@ -370,7 +429,7 @@ float flip(float val) {
 	afterDelay:0.00];
 }
 
--(IBAction)shrinkY:(id)sender;{
+-(IBAction)shrinkY:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:0], @"x",
@@ -379,7 +438,7 @@ float flip(float val) {
    afterDelay:0.00];
 }
 
--(IBAction)growX:(id)sender;{
+-(IBAction)growX:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:offset], @"x",
@@ -388,7 +447,7 @@ float flip(float val) {
 			   afterDelay:0.00];
 }
 
--(IBAction)shrinkX:(id)sender;{
+-(IBAction)shrinkX:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:-offset], @"x",
@@ -398,7 +457,7 @@ float flip(float val) {
 }
 
 
--(IBAction)moveUp:(id)sender;{
+-(IBAction)moveUp:(NSEvent*)sender;{
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 		[NSNumber numberWithBool:true], @"relative", 
@@ -407,7 +466,7 @@ float flip(float val) {
 			   afterDelay:0.00];
 }
 
--(IBAction)moveDown:(id)sender;{
+-(IBAction)moveDown:(NSEvent*)sender;{
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
@@ -416,7 +475,7 @@ float flip(float val) {
 			   afterDelay:0.00];
 }
 
--(IBAction)moveRight:(id)sender;{
+-(IBAction)moveRight:(NSEvent*)sender;{
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
@@ -425,7 +484,7 @@ float flip(float val) {
 			   afterDelay:0.00];
 }
 
--(IBAction)moveLeft:(id)sender;{
+-(IBAction)moveLeft:(NSEvent*)sender;{
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
@@ -434,37 +493,68 @@ float flip(float val) {
 			   afterDelay:0.00];
 }
 
--(IBAction)pushUp:(id)sender;{
-	[self performSelector:@selector(moveWindow:) withObject:
-	 [NSDictionary dictionaryWithObjectsAndKeys: 
-	  [NSNumber numberWithBool:false], @"relative", 
-	  @"N", @"abosolutePosition", nil]
-			   afterDelay:0.00];
+
+-(IBAction)moveLeftTrigger:(NSEvent*)sender;{
+	currentAction = MOVE_L;
+	[self handleTrigger:sender];
 }
 
--(IBAction)pushDown:(id)sender;{
-	[self performSelector:@selector(moveWindow:) withObject:
-	 [NSDictionary dictionaryWithObjectsAndKeys: 
-	  [NSNumber numberWithBool:false], @"relative", 
-	  @"S", @"abosolutePosition", nil]
-			   afterDelay:0.00];
+-(IBAction)moveRightTrigger:(NSEvent*)sender;{
+	currentAction = MOVE_R;
+	[self handleTrigger:sender];
 }
 
--(IBAction)pushRight:(id)sender;{
-	[self performSelector:@selector(moveWindow:) withObject:
-	 [NSDictionary dictionaryWithObjectsAndKeys: 
-	  [NSNumber numberWithBool:false], @"relative", 
-	  @"E", @"abosolutePosition", nil]
-			   afterDelay:0.00];
+
+-(IBAction)moveUpTrigger:(NSEvent*)sender;{
+	currentAction = MOVE_U;
+	[self handleTrigger:sender];
 }
 
--(IBAction)pushLeft:(id)sender;{
-	[self performSelector:@selector(moveWindow:) withObject:
-	 [NSDictionary dictionaryWithObjectsAndKeys: 
-	  [NSNumber numberWithBool:false], @"relative", 
-	  @"W", @"abosolutePosition", nil]
-			   afterDelay:0.00];
+
+-(IBAction)moveDownTrigger:(NSEvent*)sender;{
+	currentAction = MOVE_D;
+	[self handleTrigger:sender];
 }
 
+
+-(IBAction)pushUp:(NSEvent*)sender;{
+	if ([sender type] == NSKeyDown){
+		[self performSelector:@selector(moveWindow:) withObject:
+		 [NSDictionary dictionaryWithObjectsAndKeys:
+		  [NSNumber numberWithBool:false], @"relative",
+		  @"N", @"abosolutePosition", nil]
+				   afterDelay:0.00];
+	}
+}
+
+-(IBAction)pushDown:(NSEvent*)sender;{
+	if ([sender type] == NSKeyDown){
+		[self performSelector:@selector(moveWindow:) withObject:
+		 [NSDictionary dictionaryWithObjectsAndKeys:
+		  [NSNumber numberWithBool:false], @"relative",
+		  @"S", @"abosolutePosition", nil]
+		afterDelay:0.00];
+	}
+}
+
+-(IBAction)pushRight:(NSEvent*)sender;{
+	if ([sender type] == NSKeyDown){
+		[self performSelector:@selector(moveWindow:) withObject:
+		 [NSDictionary dictionaryWithObjectsAndKeys:
+		  [NSNumber numberWithBool:false], @"relative",
+		  @"E", @"abosolutePosition", nil]
+				   afterDelay:0.00];
+	}
+}
+
+-(IBAction)pushLeft:(NSEvent*)sender;{
+	if ([sender type] == NSKeyDown){
+		[self performSelector:@selector(moveWindow:) withObject:
+		 [NSDictionary dictionaryWithObjectsAndKeys:
+		  [NSNumber numberWithBool:false], @"relative",
+		  @"W", @"abosolutePosition", nil]
+				   afterDelay:0.00];
+	}
+}
 
 @end

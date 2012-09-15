@@ -17,6 +17,8 @@
 static NSMutableSet * _registeredHotKeys = nil;
 static UInt32 _nextHotKeyID = 1;
 OSStatus dd_hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void * userData);
+OSStatus dd_hotKeyHandler2(EventHandlerCallRef nextHandler, EventRef theEvent, void * userData);
+
 UInt32 dd_translateModifierFlags(NSUInteger flags);
 NSString* dd_stringifyModifierFlags(NSUInteger flags);
 
@@ -29,20 +31,24 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 - (id) object { return nil; }
 - (unsigned short) keyCode { return 0; }
 - (NSUInteger) modifierFlags { return 0; }
+- (int) onRelease { return onRelease; }
 
 #if NS_BLOCKS_AVAILABLE
 - (DDHotKeyTask) task { return nil; }
 #endif
 
 - (NSUInteger) hash {
-	return [self keyCode] + [self modifierFlags];
+	return [self keyCode] + [self modifierFlags] + [self onRelease];
 }
+
+@synthesize onRelease;
 
 - (BOOL) isEqual:(id)object {
 	BOOL equal = NO;
 	if ([object isKindOfClass:[DDHotKey class]]) {
 		equal = ([object keyCode] == [self keyCode]);
 		equal &= ([object modifierFlags] == [self modifierFlags]);
+		equal &= ([object onRelease] == [self onRelease]);
 	}
 	return equal;
 }
@@ -53,7 +59,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 	if ([self target] != nil && [self action] != nil) {
 		invokes = [NSString stringWithFormat:@"[%@ %@]", [self target], NSStringFromSelector([self action])];
 	}
-	return [NSString stringWithFormat:@"%@\n\t(key: %hu\n\tflags: %@\n\tinvokes: %@)", [super description], [self keyCode], flags, invokes];
+	return [NSString stringWithFormat:@"%@\n\t(key: %hu\n\tflags: %@\n\tinvokes: %@\n\tonRelease: %d)", [super description], [self keyCode], flags, invokes, [self onRelease]];
 }
 
 @end
@@ -63,7 +69,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 	id target;
 	SEL action;
 	id object;
-	
+
 #if NS_BLOCKS_AVAILABLE
 	DDHotKeyTask task;
 #endif
@@ -80,6 +86,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 @property (nonatomic) unsigned short keyCode;
 @property (nonatomic) NSUInteger modifierFlags;
 @property (nonatomic) UInt32 hotKeyID;
+@property (nonatomic) int onRelease;
 @property (nonatomic, retain) NSValue * hotKeyRef;
 
 #if NS_BLOCKS_AVAILABLE
@@ -98,6 +105,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 #if NS_BLOCKS_AVAILABLE
 @synthesize task;
 #endif
+//@synthesize onRelease;
 
 - (Class) class { return [DDHotKey class]; }
 
@@ -167,6 +175,9 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 		eventSpec.eventClass = kEventClassKeyboard; 
 		eventSpec.eventKind = kEventHotKeyPressed;
 		InstallApplicationEventHandler(&dd_hotKeyHandler, 1, &eventSpec, NULL, NULL);
+
+		eventSpec.eventKind = kEventHotKeyReleased;
+		InstallApplicationEventHandler(&dd_hotKeyHandler2, 1, &eventSpec, NULL, NULL);
 	}
 }
 
@@ -174,18 +185,19 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 	return [_registeredHotKeys filteredSetUsingPredicate:predicate];
 }
 
-- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags {
-	NSPredicate * predicate = [NSPredicate predicateWithFormat:@"keyCode = %hu AND modifierFlags = %lu", keyCode, flags];
+- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags onRelease:(int) onRelease{
+	NSPredicate * predicate = [NSPredicate predicateWithFormat:@"keyCode = %hu AND modifierFlags = %lu AND onRelease = %d", keyCode, flags, onRelease];
 	return ([[self hotKeysMatchingPredicate:predicate] count] > 0);
 }
 
 #if NS_BLOCKS_AVAILABLE
 - (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags task:(DDHotKeyTask)task {
 	//we can't add a new hotkey if something already has this combo
-	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags]) { return NO; }
+	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags onRelease:0]) { return NO; }
 	
 	_DDHotKey * newHotKey = [[_DDHotKey alloc] init];
 	[newHotKey setTask:task];
+	newHotKey.onRelease = 0;
 	[newHotKey setKeyCode:keyCode];
 	[newHotKey setModifierFlags:flags];
 	
@@ -199,14 +211,17 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 }
 #endif
 
-- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object {
+- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object onRelease:(BOOL) triggerEventOnKeyRelease {
 	//we can't add a new hotkey if something already has this combo
-	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags]) { return NO; }
+	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags onRelease:triggerEventOnKeyRelease]) {
+		return NO;
+	}
 	
 	//build the hotkey object:
 	_DDHotKey * newHotKey = [[_DDHotKey alloc] init];
 	[newHotKey setTarget:target];
 	[newHotKey setAction:action];
+	newHotKey.onRelease = triggerEventOnKeyRelease ? 1 : 0;
 	[newHotKey setObject:object];
 	[newHotKey setKeyCode:keyCode];
 	[newHotKey setModifierFlags:flags];
@@ -262,7 +277,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 
 OSStatus dd_hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void * userData) {
 	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	
+	//NSLog(@"press");
 	EventHotKeyID hotKeyID;
 	GetEventParameter(theEvent, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(hotKeyID),NULL,&hotKeyID);
 	
@@ -273,7 +288,7 @@ OSStatus dd_hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, vo
 	_DDHotKey * matchingHotKey = [matchingHotKeys anyObject];
 	
 	NSEvent * event = [NSEvent eventWithEventRef:theEvent];
-	NSEvent * keyEvent = [NSEvent keyEventWithType:NSKeyDown 
+	NSEvent * keyEvent = [NSEvent keyEventWithType:NSKeyDown
 										  location:[event locationInWindow] 
 									 modifierFlags:[event modifierFlags]
 										 timestamp:[event timestamp] 
@@ -290,6 +305,38 @@ OSStatus dd_hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, vo
 	
 	return noErr;
 }
+
+OSStatus dd_hotKeyHandler2(EventHandlerCallRef nextHandler, EventRef theEvent, void * userData) {
+	NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	//NSLog(@"release");
+	EventHotKeyID hotKeyID;
+	GetEventParameter(theEvent, kEventParamDirectObject, typeEventHotKeyID, NULL, sizeof(hotKeyID),NULL,&hotKeyID);
+
+	UInt32 keyID = hotKeyID.id;
+
+	NSSet * matchingHotKeys = [_registeredHotKeys filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"hotKeyID = %u", keyID]];
+	if ([matchingHotKeys count] > 1) { NSLog(@"ERROR!"); }
+	_DDHotKey * matchingHotKey = [matchingHotKeys anyObject];
+
+	NSEvent * event = [NSEvent eventWithEventRef:theEvent];
+	NSEvent * keyEvent = [NSEvent keyEventWithType: NSKeyUp
+										  location:[event locationInWindow]
+									 modifierFlags:[event modifierFlags]
+										 timestamp:[event timestamp]
+									  windowNumber:-1
+										   context:nil
+										characters:@""
+					   charactersIgnoringModifiers:@""
+										 isARepeat:NO
+										   keyCode:[matchingHotKey keyCode]];
+
+	[matchingHotKey invokeWithEvent:keyEvent];
+
+	[pool release];
+
+	return noErr;
+}
+
 
 UInt32 dd_translateModifierFlags(NSUInteger flags) {
 	UInt32 newFlags = 0;
