@@ -34,6 +34,7 @@
 	IBOutlet NSSlider * offsetSlider;
 	
 	float offset;
+	float offsetNow;
 
 	enum WIN_ACTION currentAction;
 }

@@ -51,11 +51,11 @@ static bool amIAuthorized (){
     [_statusItem setEnabled:YES];
     [_statusItem setMenu:menu];
 	[_statusItem setTarget:self];	
-	[_statusItem setImage:[NSImage imageNamed:@"menu.png"]];
+	[_statusItem setImage:[NSImage imageNamed:@"menuIcon"]];
 	[self registerKeys];
 	lastAbsoluteMove = nil;
 	timeoutTimer = nil;
-	offset = 100; //defaults
+	offset = 25; //defaults
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
 	currentAction = NOTHING;
@@ -65,6 +65,9 @@ static bool amIAuthorized (){
 
 -(void)update:(id)whatever{
 	//NSLog(@"update");
+	offsetNow += offset * 0.033f;
+	if (offsetNow > offset) offsetNow = offset;
+
 	switch (currentAction) {
 		case NOTHING: break;
 		case MOVE_L: [self moveLeft:nil]; break;
@@ -81,6 +84,7 @@ static bool amIAuthorized (){
 -(void)handleTrigger:(NSEvent*) e{
 	if ([e type] == NSKeyDown){
 		//NSLog(@"handleTirgegr keyDown");
+		offsetNow = 0;
 		if ( updateTimer == nil ){
 			updateTimer = [NSTimer scheduledTimerWithTimeInterval:0.016 target:self selector:@selector(update:) userInfo:nil repeats:YES] ;
 			[updateTimer retain];
@@ -99,7 +103,7 @@ static bool amIAuthorized (){
 	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
 	if ( [def stringForKey:@"offset"] ){
 		offset = [def floatForKey:@"offset"] ;
-		if (offset > 25) offset = 25;
+		if (offset > 50) offset = 50;
 		if (offset < 1) offset = 1;
 	}
 }
@@ -424,7 +428,7 @@ float flip(float val) {
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:0], @"x",
-	  [NSNumber numberWithInt:offset], @"y",
+	  [NSNumber numberWithInt:offsetNow], @"y",
 	  nil]
 	afterDelay:0.00];
 }
@@ -433,7 +437,7 @@ float flip(float val) {
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
 	  [NSNumber numberWithInt:0], @"x",
-	  [NSNumber numberWithInt:-offset], @"y",
+	  [NSNumber numberWithInt:-offsetNow], @"y",
 	  nil]
    afterDelay:0.00];
 }
@@ -441,7 +445,7 @@ float flip(float val) {
 -(IBAction)growX:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
-	  [NSNumber numberWithInt:offset], @"x",
+	  [NSNumber numberWithInt:offsetNow], @"x",
 	  [NSNumber numberWithInt:0], @"y",
 	  nil]
 			   afterDelay:0.00];
@@ -450,7 +454,7 @@ float flip(float val) {
 -(IBAction)shrinkX:(NSEvent*)sender;{
 	[self performSelector:@selector(resizeWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys:
-	  [NSNumber numberWithInt:-offset], @"x",
+	  [NSNumber numberWithInt:-offsetNow], @"x",
 	  [NSNumber numberWithInt:0], @"y",
 	  nil]
 			   afterDelay:0.00];
@@ -462,7 +466,7 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 		[NSNumber numberWithBool:true], @"relative", 
 		[NSNumber numberWithInt:0], @"x", 
-		[NSNumber numberWithInt:-offset], @"y", nil]
+		[NSNumber numberWithInt:-offsetNow], @"y", nil]
 			   afterDelay:0.00];
 }
 
@@ -471,7 +475,7 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
 	  [NSNumber numberWithInt:0], @"x", 
-	  [NSNumber numberWithInt:offset], @"y", nil]
+	  [NSNumber numberWithInt:offsetNow], @"y", nil]
 			   afterDelay:0.00];
 }
 
@@ -479,7 +483,7 @@ float flip(float val) {
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
-	  [NSNumber numberWithInt:offset], @"x", 
+	  [NSNumber numberWithInt:offsetNow], @"x", 
 	  [NSNumber numberWithInt:00], @"y", nil]
 			   afterDelay:0.00];
 }
@@ -488,7 +492,7 @@ float flip(float val) {
 	[self performSelector:@selector(moveWindow:) withObject:
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
-	  [NSNumber numberWithInt:-offset], @"x", 
+	  [NSNumber numberWithInt:-offsetNow], @"x",
 	  [NSNumber numberWithInt:0], @"y", nil]
 			   afterDelay:0.00];
 }
