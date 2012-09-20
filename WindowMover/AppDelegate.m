@@ -130,7 +130,7 @@ static bool amIAuthorized (){
 	timeoutTimer = nil;
 }
 
--(void)resizeWindow:(NSDictionary*)offset{
+-(void)resizeWindow:(NSDictionary*)offset_{
 
     AXValueRef temp;
     CGSize windowSize;
@@ -167,9 +167,8 @@ static bool amIAuthorized (){
 	//NSLog(@"current window size %f %f", windowSize.width, windowSize.height);
 	//NSLog(@"offset: %@",offset);
 
-	windowSize.width += [[offset objectForKey:@"x"] intValue];
-	windowSize.height += [[offset objectForKey:@"y"] intValue];
-
+	windowSize.width += [[offset_ objectForKey:@"x"] intValue];
+	windowSize.height += [[offset_ objectForKey:@"y"] intValue];
 
 	AXError err;
 
@@ -247,14 +246,12 @@ static bool amIAuthorized (){
 		for (int i = 0; i < [screens count]; i++){
 			NSScreen * s = [screens objectAtIndex:i];
 			NSRect f = [s frame];
-			NSPoint p = NSMakePoint(windowPosition.x , flip(windowPosition.y) );
+			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2) );
 			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
 			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
 				index = i;
 			}
 		}
-
-		//NSLog(@"win is in screen %d", index);	
 
 		if (index != -1){
 			
@@ -275,7 +272,7 @@ static bool amIAuthorized (){
 			int nsY=[nextScreen visibleFrame].origin.y;
 			float ratioY = (float)nsH / sH;
 			float ratioX = (float)[nextScreen visibleFrame].size.width / (float) [screen visibleFrame].size.width;
-			float margin = 1;
+			float margin = 0;
 			
 			//NSLog(@"rx: %f ry: %f", ratioX, ratioY );
 			
@@ -364,20 +361,24 @@ float flip(float val) {
 - (void) registerKeys{
 	
 	keys = [[DDHotKeyCenter alloc] init];
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveUpTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveDownTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveLeftTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveRightTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveUpTrigger:) object:nil ];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveDownTrigger:) object:nil];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveLeftTrigger:) object:nil ];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask target:self action:@selector(moveRightTrigger:) object:nil ];
 
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushUp:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushDown:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushLeft:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushRight:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushUp:) object:nil ];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushDown:) object:nil ];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushLeft:) object:nil ];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(pushRight:) object:nil ];
 
-	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkYTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growYTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkXTrigger:) object:nil onRelease:FALSE];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growXTrigger:) object:nil onRelease:FALSE];
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkYTrigger:) object:nil ];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growYTrigger:) object:nil ];
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(shrinkXTrigger:) object:nil ];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growXTrigger:) object:nil ];
+
+	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(maximize:) object:nil ];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(center:) object:nil ];
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(centerAndResize:) object:nil ];
 
 }
 
@@ -397,10 +398,242 @@ float flip(float val) {
 	[keys unregisterHotKeyWithKeyCode:123 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
 	[keys unregisterHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask];
 
+	[keys unregisterHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
+
 	[keys release];
 }
 
+-(void)maximize:(NSEvent*)sender{
 
+	if ([sender type] == NSKeyDown){
+
+		AXValueRef temp;
+		CGSize windowSize;
+		CGPoint windowPosition;
+		AXUIElementRef frontMostApp;
+		AXUIElementRef frontMostWindow;
+
+		if (!amIAuthorized()) {
+			printf("Can't use accessibility API!\n");
+			return ;
+		}
+
+		frontMostApp = getFrontMostApp();
+		AXUIElementCopyAttributeValue( frontMostApp, kAXFocusedWindowAttribute, (CFTypeRef *)&frontMostWindow );
+
+		if (frontMostWindow == nil){
+			NSLog(@"Can't get FrontMost Window!");
+			return;
+		}
+
+		AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
+		if (temp == nil){
+			NSLog(@"Can't get FrontMost Window position!");
+			return;
+		}
+
+		AXValueGetValue(temp, kAXValueCGSizeType, &windowSize);
+		CFRelease(temp);
+		AXUIElementCopyAttributeValue( frontMostWindow, kAXPositionAttribute, (CFTypeRef *)&temp );
+		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
+		CFRelease(temp);
+
+		NSArray * screens = [NSScreen screens];
+		int index = -1;
+
+		for (int i = 0; i < [screens count]; i++){
+			NSScreen * s = [screens objectAtIndex:i];
+			NSRect f = [s frame];
+			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2) );
+			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
+			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
+				index = i;
+			}
+		}
+
+
+		if (index != -1){
+
+			NSScreen * screen = [screens objectAtIndex:index];
+			NSPoint screenPos = [screen frame].origin;
+			NSSize screenSize = [screen frame].size;
+			screenSize.width -=0;
+			screenSize.height -=0;
+
+			AXError err;
+			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+			//printf("err at set position %d\n", err);
+			CFRelease(temp);
+
+			temp = AXValueCreate(kAXValueCGSizeType, &screenSize);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+			//printf("err at set size %d\n", err);
+			CFRelease(temp);
+
+			CFRelease(frontMostWindow);
+			CFRelease(frontMostApp);
+		}else{
+			//NSLog(@"nooo!");
+		}
+	}
+}
+
+-(void)center:(NSEvent*)sender{
+
+	if ([sender type] == NSKeyDown){
+
+		AXValueRef temp;
+		CGSize windowSize;
+		CGPoint windowPosition;
+		AXUIElementRef frontMostApp;
+		AXUIElementRef frontMostWindow;
+
+		if (!amIAuthorized()) {
+			printf("Can't use accessibility API!\n");
+			return ;
+		}
+
+		frontMostApp = getFrontMostApp();
+		AXUIElementCopyAttributeValue( frontMostApp, kAXFocusedWindowAttribute, (CFTypeRef *)&frontMostWindow );
+
+		if (frontMostWindow == nil){
+			NSLog(@"Can't get FrontMost Window!");
+			return;
+		}
+
+		AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
+		if (temp == nil){
+			NSLog(@"Can't get FrontMost Window position!");
+			return;
+		}
+
+		AXValueGetValue(temp, kAXValueCGSizeType, &windowSize);
+		CFRelease(temp);
+		AXUIElementCopyAttributeValue( frontMostWindow, kAXPositionAttribute, (CFTypeRef *)&temp );
+		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
+		CFRelease(temp);
+
+		NSArray * screens = [NSScreen screens];
+		int index = -1;
+		int nextIndex = -1;
+		for (int i = 0; i < [screens count]; i++){
+			NSScreen * s = [screens objectAtIndex:i];
+			NSRect f = [s frame];
+			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2)  );
+			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
+			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
+				index = i;
+			}
+		}
+
+		if (index != -1){
+
+			NSScreen * screen = [screens objectAtIndex:index];
+			NSPoint screenPos = [screen visibleFrame].origin;
+			NSSize screenSize = [screen visibleFrame].size;
+
+			screenPos.x += screenSize.width * 0.5f - windowSize.width * 0.5f ;
+			screenPos.y = flip(screenSize.height + screenPos.y) + screenSize.height * 0.5 - windowSize.height * 0.5;
+
+			AXError err;
+			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+			//printf("err at set position %d\n", err);
+			CFRelease(temp);
+
+		}
+		CFRelease(frontMostWindow);
+		CFRelease(frontMostApp);
+	}
+}
+
+-(void)centerAndResize:(NSEvent*)sender{
+
+	if ([sender type] == NSKeyDown){
+
+		AXValueRef temp;
+		CGSize windowSize;
+		CGPoint windowPosition;
+		AXUIElementRef frontMostApp;
+		AXUIElementRef frontMostWindow;
+
+		if (!amIAuthorized()) {
+			printf("Can't use accessibility API!\n");
+			return ;
+		}
+
+		frontMostApp = getFrontMostApp();
+		AXUIElementCopyAttributeValue( frontMostApp, kAXFocusedWindowAttribute, (CFTypeRef *)&frontMostWindow );
+
+		if (frontMostWindow == nil){
+			NSLog(@"Can't get FrontMost Window!");
+			return;
+		}
+
+		AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
+		if (temp == nil){
+			NSLog(@"Can't get FrontMost Window position!");
+			return;
+		}
+
+		AXValueGetValue(temp, kAXValueCGSizeType, &windowSize);
+		CFRelease(temp);
+		AXUIElementCopyAttributeValue( frontMostWindow, kAXPositionAttribute, (CFTypeRef *)&temp );
+		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
+		CFRelease(temp);
+
+		NSArray * screens = [NSScreen screens];
+		int index = -1;
+		int nextIndex = -1;
+		for (int i = 0; i < [screens count]; i++){
+			NSScreen * s = [screens objectAtIndex:i];
+			NSRect f = [s frame];
+			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2) );
+			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
+			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
+				index = i;
+			}
+		}
+
+		if (index != -1){
+
+			float screenWindowSizePercentX = 0.6;
+			float screenWindowSizePercentY = 0.8;
+			NSScreen * screen = [screens objectAtIndex:index];
+			NSPoint screenPos = [screen visibleFrame].origin;
+			NSSize screenSize = [screen visibleFrame].size;
+
+			screenPos.x += screenSize.width * 0.5 - screenSize.width * (screenWindowSizePercentX) * 0.5;
+			screenPos.y = flip(screenSize.height + screenPos.y) + screenSize.height * 0.5 * (1-screenWindowSizePercentY);
+
+			screenSize.width *= screenWindowSizePercentX;
+			screenSize.height *= screenWindowSizePercentY;
+
+			AXError err;
+
+			temp = AXValueCreate(kAXValueCGSizeType, &screenSize);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+			CFRelease(temp);
+
+			if(err != 0){ //if we couldnt resize win, take in account so that centering at least still works
+				//NSLog(@"fix");
+				screenPos.x = [screen visibleFrame].origin.x + [screen visibleFrame].size.width * 0.5 - windowSize.width * 0.5;
+				screenPos.y = flip([screen visibleFrame].origin.y + [screen visibleFrame].size.height) + [screen visibleFrame].size.height * 0.5- windowSize.height * 0.5 ;
+			}
+
+			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+			CFRelease(temp);
+
+		}
+		CFRelease(frontMostWindow);
+		CFRelease(frontMostApp);
+
+	}
+}
 
 
 -(IBAction)growYTrigger:(NSEvent*)sender;{

@@ -185,15 +185,15 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 	return [_registeredHotKeys filteredSetUsingPredicate:predicate];
 }
 
-- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags onRelease:(int) onRelease{
-	NSPredicate * predicate = [NSPredicate predicateWithFormat:@"keyCode = %hu AND modifierFlags = %lu AND onRelease = %d", keyCode, flags, onRelease];
+- (BOOL) hasRegisteredHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags {
+	NSPredicate * predicate = [NSPredicate predicateWithFormat:@"keyCode = %hu AND modifierFlags = %lu", keyCode, flags];
 	return ([[self hotKeysMatchingPredicate:predicate] count] > 0);
 }
 
 #if NS_BLOCKS_AVAILABLE
 - (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags task:(DDHotKeyTask)task {
 	//we can't add a new hotkey if something already has this combo
-	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags onRelease:0]) { return NO; }
+	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags ]) { return NO; }
 	
 	_DDHotKey * newHotKey = [[_DDHotKey alloc] init];
 	[newHotKey setTask:task];
@@ -211,9 +211,9 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 }
 #endif
 
-- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object onRelease:(BOOL) triggerEventOnKeyRelease {
+- (BOOL) registerHotKeyWithKeyCode:(unsigned short)keyCode modifierFlags:(NSUInteger)flags target:(id)target action:(SEL)action object:(id)object {
 	//we can't add a new hotkey if something already has this combo
-	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags onRelease:triggerEventOnKeyRelease]) {
+	if ([self hasRegisteredHotKeyWithKeyCode:keyCode modifierFlags:flags ]) {
 		return NO;
 	}
 	
@@ -221,7 +221,7 @@ NSString* dd_stringifyModifierFlags(NSUInteger flags);
 	_DDHotKey * newHotKey = [[_DDHotKey alloc] init];
 	[newHotKey setTarget:target];
 	[newHotKey setAction:action];
-	newHotKey.onRelease = triggerEventOnKeyRelease ? 1 : 0;
+	//newHotKey.onRelease = triggerEventOnKeyRelease ? 1 : 0;
 	[newHotKey setObject:object];
 	[newHotKey setKeyCode:keyCode];
 	[newHotKey setModifierFlags:flags];
