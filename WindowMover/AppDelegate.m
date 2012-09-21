@@ -59,7 +59,9 @@ static bool amIAuthorized (){
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
 	currentAction = NOTHING;
+	centeredRecently = centeredResizedRecently = fulledRecently = false;
 	updateTimer = nil;
+	timeOutTime = 2.0;
 }
 
 
@@ -128,6 +130,9 @@ static bool amIAuthorized (){
 	if (lastAbsoluteMove!= nil) [lastAbsoluteMove release];
 		lastAbsoluteMove = nil;
 	timeoutTimer = nil;
+	centeredRecently = false;
+	centeredResizedRecently = false;
+	fulledRecently = false;
 }
 
 -(void)resizeWindow:(NSDictionary*)offset_{
@@ -191,7 +196,7 @@ static bool amIAuthorized (){
 -(void)moveWindow:(NSDictionary*)offset{
 
 	if (timeoutTimer != nil) [timeoutTimer invalidate];
-	timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
+	timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
 	
     AXValueRef temp;
     CGSize windowSize;
@@ -409,6 +414,9 @@ float flip(float val) {
 
 	if ([sender type] == NSKeyDown){
 
+		if (timeoutTimer != nil) [timeoutTimer invalidate];
+		timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
+
 		AXValueRef temp;
 		CGSize windowSize;
 		CGPoint windowPosition;
@@ -453,16 +461,29 @@ float flip(float val) {
 			}
 		}
 
-
 		if (index != -1){
+
+			if (fulledRecently){ //user pressed 2 times in a row center, so jump center across screens
+				index = index + 1;
+				if (index >= [screens count]) {
+					index = 0;
+				}
+			}
+
+			//NSLog(@"maximize %d", index);
 
 			NSScreen * screen = [screens objectAtIndex:index];
 			NSPoint screenPos = [screen frame].origin;
 			NSSize screenSize = [screen frame].size;
-			screenSize.width -=0;
-			screenSize.height -=0;
+
+			screenPos.y = flip(screenSize.height + screenPos.y);
 
 			AXError err;
+			NSSize smallSize = NSMakeSize(800, 600);
+			temp = AXValueCreate(kAXValueCGSizeType, &smallSize);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+			CFRelease(temp);
+
 			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
 			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
 			//printf("err at set position %d\n", err);
@@ -475,15 +496,18 @@ float flip(float val) {
 
 			CFRelease(frontMostWindow);
 			CFRelease(frontMostApp);
-		}else{
-			//NSLog(@"nooo!");
 		}
+		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		fulledRecently = true;
 	}
 }
 
 -(void)center:(NSEvent*)sender{
 
 	if ([sender type] == NSKeyDown){
+
+		if (timeoutTimer != nil) [timeoutTimer invalidate];
+		timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];		
 
 		AXValueRef temp;
 		CGSize windowSize;
@@ -531,6 +555,13 @@ float flip(float val) {
 
 		if (index != -1){
 
+			if (centeredRecently){ //user pressed 2 times in a row center, so jump center across screens
+				index = index + 1;
+				if (index >= [screens count]) {
+					index = 0;
+				}
+			}
+
 			NSScreen * screen = [screens objectAtIndex:index];
 			NSPoint screenPos = [screen visibleFrame].origin;
 			NSSize screenSize = [screen visibleFrame].size;
@@ -547,12 +578,18 @@ float flip(float val) {
 		}
 		CFRelease(frontMostWindow);
 		CFRelease(frontMostApp);
+
+		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		centeredRecently = true;
 	}
 }
 
 -(void)centerAndResize:(NSEvent*)sender{
 
 	if ([sender type] == NSKeyDown){
+
+		if (timeoutTimer != nil) [timeoutTimer invalidate];
+		timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
 
 		AXValueRef temp;
 		CGSize windowSize;
@@ -600,6 +637,15 @@ float flip(float val) {
 
 		if (index != -1){
 
+			if (centeredResizedRecently){ //user pressed 2 times in a row center, so jump center across screens
+				index = index + 1;
+				if (index >= [screens count]) {
+					index = 0;
+				}
+			}
+
+			//NSLog(@"center resize %d", index);
+
 			float screenWindowSizePercentX = 0.6;
 			float screenWindowSizePercentY = 0.8;
 			NSScreen * screen = [screens objectAtIndex:index];
@@ -632,6 +678,8 @@ float flip(float val) {
 		CFRelease(frontMostWindow);
 		CFRelease(frontMostApp);
 
+		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		centeredResizedRecently = true;
 	}
 }
 

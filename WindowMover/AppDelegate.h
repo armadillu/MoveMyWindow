@@ -28,6 +28,9 @@
 	
 	NSStatusItem*	_statusItem;
 	NSString * lastAbsoluteMove;
+	bool centeredRecently;
+	bool centeredResizedRecently;
+	bool fulledRecently;
 	NSTimer * timeoutTimer;
 	NSTimer * updateTimer;
 	IBOutlet NSMenu * menu;
@@ -35,6 +38,8 @@
 	
 	float offset;
 	float offsetNow;
+
+	float timeOutTime;
 
 	enum WIN_ACTION currentAction;
 }
