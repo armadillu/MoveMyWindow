@@ -31,6 +31,7 @@
 	bool centeredRecently;
 	bool centeredResizedRecently;
 	bool fulledRecently;
+	bool halfedRecently;
 	NSTimer * timeoutTimer;
 	NSTimer * updateTimer;
 	IBOutlet NSMenu * menu;

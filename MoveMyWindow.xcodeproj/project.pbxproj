@@ -26,6 +26,8 @@
 		BB6595E3160B2C4600972A6B /* keys5.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6595E1160B2C4600972A6B /* keys5.png */; };
 		BB8DE840160B3ADB00AFB5D7 /* keys6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8DE83E160B3ADB00AFB5D7 /* keys6@2x.png */; };
 		BB8DE841160B3ADB00AFB5D7 /* keys6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8DE83F160B3ADB00AFB5D7 /* keys6.png */; };
+		BBAEBAFA1645F43E00076793 /* keys7.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF81645F43E00076793 /* keys7.png */; };
+		BBAEBAFB1645F43E00076793 /* keys7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF91645F43E00076793 /* keys7@2x.png */; };
 		BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */; };
 		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
 		BBFE8906150DEBE5006D4F71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8905150DEBE5006D4F71 /* main.m */; };
@@ -54,6 +56,8 @@
 		BB6595E1160B2C4600972A6B /* keys5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys5.png; sourceTree = "<group>"; };
 		BB8DE83E160B3ADB00AFB5D7 /* keys6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys6@2x.png"; sourceTree = "<group>"; };
 		BB8DE83F160B3ADB00AFB5D7 /* keys6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys6.png; sourceTree = "<group>"; };
+		BBAEBAF81645F43E00076793 /* keys7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys7.png; sourceTree = "<group>"; };
+		BBAEBAF91645F43E00076793 /* keys7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys7@2x.png"; sourceTree = "<group>"; };
 		BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveMyWindow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BBFE88FC150DEBE5006D4F71 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -154,6 +158,8 @@
 				BB6595E1160B2C4600972A6B /* keys5.png */,
 				BB8DE83E160B3ADB00AFB5D7 /* keys6@2x.png */,
 				BB8DE83F160B3ADB00AFB5D7 /* keys6.png */,
+				BBAEBAF81645F43E00076793 /* keys7.png */,
+				BBAEBAF91645F43E00076793 /* keys7@2x.png */,
 				BB2B6758150DFFB30035A794 /* menuIcon.png */,
 				BB055107160A7DB90044ADF4 /* menuIcon@2x.png */,
 				BB2B6756150DFEEB0035A794 /* icon.icns */,
@@ -237,6 +243,8 @@
 				BB6595E3160B2C4600972A6B /* keys5.png in Resources */,
 				BB8DE840160B3ADB00AFB5D7 /* keys6@2x.png in Resources */,
 				BB8DE841160B3ADB00AFB5D7 /* keys6.png in Resources */,
+				BBAEBAFA1645F43E00076793 /* keys7.png in Resources */,
+				BBAEBAFB1645F43E00076793 /* keys7@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

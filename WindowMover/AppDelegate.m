@@ -59,7 +59,7 @@ static bool amIAuthorized (){
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
 	currentAction = NOTHING;
-	centeredRecently = centeredResizedRecently = fulledRecently = false;
+	centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 	updateTimer = nil;
 	timeOutTime = 2.0;
 }
@@ -382,8 +382,9 @@ float flip(float val) {
 	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSAlternateKeyMask|NSCommandKeyMask target:self action:@selector(growXTrigger:) object:nil ];
 
 	[keys registerHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(maximize:) object:nil ];
-	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(center:) object:nil ];
-	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(centerAndResize:) object:nil ];
+	[keys registerHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(center:) object:nil ]; //right
+	[keys registerHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(halfScreenSize:) object:nil ]; //left
+	[keys registerHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSCommandKeyMask target:self action:@selector(centerAndResize:) object:nil ]; //down
 
 }
 
@@ -405,7 +406,9 @@ float flip(float val) {
 
 	[keys unregisterHotKeyWithKeyCode:126 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
 	[keys unregisterHotKeyWithKeyCode:125 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
+	[keys unregisterHotKeyWithKeyCode:123 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
 	[keys unregisterHotKeyWithKeyCode:124 modifierFlags:NSControlKeyMask|NSCommandKeyMask];
+
 
 	[keys release];
 }
@@ -497,8 +500,103 @@ float flip(float val) {
 			CFRelease(frontMostWindow);
 			CFRelease(frontMostApp);
 		}
-		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 		fulledRecently = true;
+	}
+}
+
+-(void)halfScreenSize:(NSEvent*)sender{
+
+	if ([sender type] == NSKeyDown){
+
+		if (timeoutTimer != nil) [timeoutTimer invalidate];
+		timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];
+
+		AXValueRef temp;
+		CGSize windowSize;
+		CGPoint windowPosition;
+		AXUIElementRef frontMostApp;
+		AXUIElementRef frontMostWindow;
+
+		if (!amIAuthorized()) {
+			printf("Can't use accessibility API!\n");
+			return ;
+		}
+
+		frontMostApp = getFrontMostApp();
+		AXUIElementCopyAttributeValue( frontMostApp, kAXFocusedWindowAttribute, (CFTypeRef *)&frontMostWindow );
+
+		if (frontMostWindow == nil){
+			NSLog(@"Can't get FrontMost Window!");
+			return;
+		}
+
+		AXUIElementCopyAttributeValue(frontMostWindow, kAXSizeAttribute, (CFTypeRef *)&temp);
+		if (temp == nil){
+			NSLog(@"Can't get FrontMost Window position!");
+			return;
+		}
+
+		AXValueGetValue(temp, kAXValueCGSizeType, &windowSize);
+		CFRelease(temp);
+		AXUIElementCopyAttributeValue( frontMostWindow, kAXPositionAttribute, (CFTypeRef *)&temp );
+		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
+		CFRelease(temp);
+
+		NSArray * screens = [NSScreen screens];
+		int index = -1;
+
+		for (int i = 0; i < [screens count]; i++){
+			NSScreen * s = [screens objectAtIndex:i];
+			NSRect f = [s frame];
+			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2) );
+			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
+			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
+				index = i;
+			}
+		}
+
+		if (index != -1){
+
+			//NSLog(@"maximize %d", index);
+
+			NSScreen * screen = [screens objectAtIndex:index];
+			NSPoint screenPos = [screen frame].origin;
+			NSSize screenSize = [screen frame].size;
+			screenSize.width /= 2;
+
+			if (halfedRecently){ //user pressed 2 times in a row center, so jump center across screens
+				if ( windowPosition.x - screenPos.x < screenSize.width * 0.5 ){
+					//NSLog(@"one!");
+					screenPos.x += screenSize.width;
+				}else{
+					//NSLog(@"two!");
+				}
+			}
+
+			screenPos.y = flip(screenSize.height + screenPos.y);
+
+			AXError err;
+			NSSize smallSize = NSMakeSize(800, 600);
+			temp = AXValueCreate(kAXValueCGSizeType, &smallSize);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+			CFRelease(temp);
+
+			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+			//printf("err at set position %d\n", err);
+			CFRelease(temp);
+
+			temp = AXValueCreate(kAXValueCGSizeType, &screenSize);
+			err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+			//printf("err at set size %d\n", err);
+			CFRelease(temp);
+
+			CFRelease(frontMostWindow);
+			CFRelease(frontMostApp);
+		}
+		centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
+		halfedRecently = true;
 	}
 }
 
@@ -506,6 +604,7 @@ float flip(float val) {
 
 	if ([sender type] == NSKeyDown){
 
+		//NSLog(@"center");
 		if (timeoutTimer != nil) [timeoutTimer invalidate];
 		timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeOutTime target:self selector:@selector(timeOut) userInfo:nil repeats:NO];		
 
@@ -579,7 +678,7 @@ float flip(float val) {
 		CFRelease(frontMostWindow);
 		CFRelease(frontMostApp);
 
-		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 		centeredRecently = true;
 	}
 }
@@ -646,8 +745,8 @@ float flip(float val) {
 
 			//NSLog(@"center resize %d", index);
 
-			float screenWindowSizePercentX = 0.6;
-			float screenWindowSizePercentY = 0.8;
+			float screenWindowSizePercentX = 0.7;
+			float screenWindowSizePercentY = 0.7;
 			NSScreen * screen = [screens objectAtIndex:index];
 			NSPoint screenPos = [screen visibleFrame].origin;
 			NSSize screenSize = [screen visibleFrame].size;
@@ -678,7 +777,7 @@ float flip(float val) {
 		CFRelease(frontMostWindow);
 		CFRelease(frontMostApp);
 
-		centeredRecently = centeredResizedRecently = fulledRecently = false;
+		centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 		centeredResizedRecently = true;
 	}
 }
