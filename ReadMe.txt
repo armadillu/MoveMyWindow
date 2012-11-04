@@ -1,1 +1,1 @@
-Simple OS X app to move frontmost window with global keyboard shortcuts
+Simple OS X app to control the frontmost window with global keyboard shortcuts, works with multiple screens too.
