@@ -745,8 +745,8 @@ float flip(float val) {
 
 			//NSLog(@"center resize %d", index);
 
-			float screenWindowSizePercentX = 0.7;
-			float screenWindowSizePercentY = 0.7;
+			float screenWindowSizePercentX = 0.6;
+			float screenWindowSizePercentY = 0.95;
 			NSScreen * screen = [screens objectAtIndex:index];
 			NSPoint screenPos = [screen visibleFrame].origin;
 			NSSize screenSize = [screen visibleFrame].size;
