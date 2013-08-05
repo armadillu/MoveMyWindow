@@ -701,7 +701,7 @@ IERhdmUgRGVMb25nA</string>
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="132918639">
+					<object class="NSButton" id="801187373">
 						<reference key="NSNextResponder" ref="777450498"/>
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{93, -1}, {58, 16}}</string>
@@ -710,7 +710,7 @@ IERhdmUgRGVMb25nA</string>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
-						<object class="NSButtonCell" key="NSCell" id="1043124613">
+						<object class="NSButtonCell" key="NSCell" id="449196559">
 							<int key="NSCellFlags">67108864</int>
 							<int key="NSCellFlags2">134479872</int>
 							<string key="NSContents">Reset</string>
@@ -720,7 +720,7 @@ IERhdmUgRGVMb25nA</string>
 								<int key="NSfFlags">3614</int>
 							</object>
 							<string key="NSCellIdentifier">_NS:9</string>
-							<reference key="NSControlView" ref="132918639"/>
+							<reference key="NSControlView" ref="801187373"/>
 							<int key="NSButtonFlags">-2038284288</int>
 							<int key="NSButtonFlags2">129</int>
 							<string key="NSAlternateContents"/>
@@ -736,7 +736,7 @@ IERhdmUgRGVMb25nA</string>
 						<string key="NSFrame">{{21, -2}, {58, 18}}</string>
 						<reference key="NSSuperview" ref="777450498"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="132918639"/>
+						<reference key="NSNextKeyView" ref="801187373"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="154144489">
@@ -999,7 +999,7 @@ IERhdmUgRGVMb25nA</string>
 					<object class="IBActionConnection" key="connection">
 						<string key="label">resetGamma:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="132918639"/>
+						<reference key="destination" ref="801187373"/>
 					</object>
 					<int key="connectionID">1477</int>
 				</object>
@@ -1267,7 +1267,7 @@ IERhdmUgRGVMb25nA</string>
 							<reference ref="560622095"/>
 							<reference ref="256844213"/>
 							<reference ref="1054759581"/>
-							<reference ref="132918639"/>
+							<reference ref="801187373"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1367,16 +1367,16 @@ IERhdmUgRGVMb25nA</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1475</int>
-						<reference key="object" ref="132918639"/>
+						<reference key="object" ref="801187373"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1043124613"/>
+							<reference ref="449196559"/>
 						</array>
 						<reference key="parent" ref="777450498"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1476</int>
-						<reference key="object" ref="1043124613"/>
-						<reference key="parent" ref="132918639"/>
+						<reference key="object" ref="449196559"/>
+						<reference key="parent" ref="801187373"/>
 					</object>
 				</array>
 			</object>
