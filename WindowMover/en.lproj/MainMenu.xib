@@ -701,13 +701,42 @@ IERhdmUgRGVMb25nA</string>
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">274</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="NSButton" id="256844213">
+					<object class="NSButton" id="132918639">
 						<reference key="NSNextResponder" ref="777450498"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{56, -2}, {58, 18}}</string>
+						<string key="NSFrame">{{93, -1}, {58, 16}}</string>
 						<reference key="NSSuperview" ref="777450498"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="1043124613">
+							<int key="NSCellFlags">67108864</int>
+							<int key="NSCellFlags2">134479872</int>
+							<string key="NSContents">Reset</string>
+							<object class="NSFont" key="NSSupport">
+								<string key="NSName">LucidaGrande</string>
+								<double key="NSSize">9</double>
+								<int key="NSfFlags">3614</int>
+							</object>
+							<string key="NSCellIdentifier">_NS:9</string>
+							<reference key="NSControlView" ref="132918639"/>
+							<int key="NSButtonFlags">-2038284288</int>
+							<int key="NSButtonFlags2">129</int>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
+						</object>
+						<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+					</object>
+					<object class="NSButton" id="256844213">
+						<reference key="NSNextResponder" ref="777450498"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{21, -2}, {58, 18}}</string>
+						<reference key="NSSuperview" ref="777450498"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="132918639"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="154144489">
@@ -781,8 +810,8 @@ IERhdmUgRGVMb25nA</string>
 							<string key="NSContents"/>
 							<string key="NSCellIdentifier">_NS:9</string>
 							<reference key="NSControlView" ref="1054759581"/>
-							<double key="NSMaxValue">1</double>
-							<double key="NSMinValue">0.0</double>
+							<double key="NSMaxValue">0.90000000000000002</double>
+							<double key="NSMinValue">0.10000000000000001</double>
 							<double key="NSValue">0.5</double>
 							<double key="NSAltIncValue">0.0</double>
 							<int key="NSNumberOfTickMarks">1</int>
@@ -965,6 +994,14 @@ IERhdmUgRGVMb25nA</string>
 						<reference key="destination" ref="256844213"/>
 					</object>
 					<int key="connectionID">1474</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">resetGamma:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="132918639"/>
+					</object>
+					<int key="connectionID">1477</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1230,6 +1267,7 @@ IERhdmUgRGVMb25nA</string>
 							<reference ref="560622095"/>
 							<reference ref="256844213"/>
 							<reference ref="1054759581"/>
+							<reference ref="132918639"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -1327,6 +1365,19 @@ IERhdmUgRGVMb25nA</string>
 						<reference key="object" ref="154144489"/>
 						<reference key="parent" ref="256844213"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1475</int>
+						<reference key="object" ref="132918639"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="1043124613"/>
+						</array>
+						<reference key="parent" ref="777450498"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">1476</int>
+						<reference key="object" ref="1043124613"/>
+						<reference key="parent" ref="132918639"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1372,6 +1423,8 @@ IERhdmUgRGVMb25nA</string>
 				<string key="1470.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1471.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="1472.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1475.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="1476.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="420.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="494.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="730.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1389,7 +1442,7 @@ IERhdmUgRGVMb25nA</string>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">1474</int>
+			<int key="maxID">1477</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1403,6 +1456,7 @@ IERhdmUgRGVMb25nA</string>
 						<string key="moveRight:">NSEvent</string>
 						<string key="moveUp:">NSEvent</string>
 						<string key="pushUp:">NSEvent</string>
+						<string key="resetGamma:">id</string>
 						<string key="setGamma:">id</string>
 						<string key="setGammaInvert:">id</string>
 					</dictionary>
@@ -1430,6 +1484,10 @@ IERhdmUgRGVMb25nA</string>
 						<object class="IBActionInfo" key="pushUp:">
 							<string key="name">pushUp:</string>
 							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="resetGamma:">
+							<string key="name">resetGamma:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="setGamma:">
 							<string key="name">setGamma:</string>

@@ -65,6 +65,7 @@
 
 -(IBAction)setGamma:(id)sender;
 -(IBAction)setGammaInvert:(id)sender;
+-(IBAction)resetGamma:(id)sender;
 
 
 - (void) registerKeys;

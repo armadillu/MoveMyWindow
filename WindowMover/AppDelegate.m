@@ -68,14 +68,12 @@ static bool amIAuthorized (){
 }
 
 -(IBAction)setGamma:(id)sender;{
-	NSLog(@"gamma; %f", [sender floatValue]);
 
 	if([gammaInvertToggle state] == FALSE){
 		[GammaControl setGamma:[sender floatValue]];
 	}else{
 		[GammaControl setGammaInverted:[sender floatValue]];
 	}
-
 }
 
 -(IBAction)setGammaInvert:(id)sender;{
@@ -84,6 +82,15 @@ static bool amIAuthorized (){
 	}else{
 		[GammaControl setGammaInverted:[gammaSlider floatValue]];
 	}
+}
+
+-(IBAction)resetGamma:(id)sender;{
+	if([gammaInvertToggle state] == FALSE){
+		[GammaControl setGamma:0.5];
+	}else{
+		[GammaControl setGammaInverted:0.5];
+	}
+	[gammaSlider setFloatValue:0.5];
 }
 
 -(void)update:(id)whatever{
