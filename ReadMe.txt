@@ -1,1 +1,1 @@
-Simple OS X app to control the frontmost window with global keyboard shortcuts, works with multiple screens too.
+Simple OS X app to control the frontmost window with global keyboard shortcuts, works with multiple screens too. It also offers quick access to gamma control now.
