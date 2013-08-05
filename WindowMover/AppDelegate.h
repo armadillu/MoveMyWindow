@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "DDHotKeyCenter.h"
+#include "GammaControl.h"
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
@@ -36,7 +37,16 @@
 	NSTimer * updateTimer;
 	IBOutlet NSMenu * menu;
 	IBOutlet NSSlider * offsetSlider;
-	
+	IBOutlet NSSlider * gammaSlider;
+
+	IBOutlet NSButton * gammaInvertToggle;
+
+	IBOutlet NSView * gammaView;
+	IBOutlet NSMenuItem* gammaMenuItem;
+
+	IBOutlet NSView * speedView;
+	IBOutlet NSMenuItem* speedMenuItem;
+
 	float offset;
 	float offsetNow;
 
@@ -52,6 +62,10 @@
 -(IBAction)pushUp:(NSEvent*)sender;
 
 -(IBAction)changeOffset:(id)sender;
+
+-(IBAction)setGamma:(id)sender;
+-(IBAction)setGammaInvert:(id)sender;
+
 
 - (void) registerKeys;
 - (void) unregisterKeys;

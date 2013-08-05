@@ -62,8 +62,29 @@ static bool amIAuthorized (){
 	centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 	updateTimer = nil;
 	timeOutTime = 2.0;
+
+	[gammaMenuItem setView:gammaView];
+	[speedMenuItem setView:speedView];
 }
 
+-(IBAction)setGamma:(id)sender;{
+	NSLog(@"gamma; %f", [sender floatValue]);
+
+	if([gammaInvertToggle state] == FALSE){
+		[GammaControl setGamma:[sender floatValue]];
+	}else{
+		[GammaControl setGammaInverted:[sender floatValue]];
+	}
+
+}
+
+-(IBAction)setGammaInvert:(id)sender;{
+	if([sender state] == FALSE){
+		[GammaControl setGamma:[gammaSlider floatValue]];
+	}else{
+		[GammaControl setGammaInverted:[gammaSlider floatValue]];
+	}
+}
 
 -(void)update:(id)whatever{
 	//NSLog(@"update");

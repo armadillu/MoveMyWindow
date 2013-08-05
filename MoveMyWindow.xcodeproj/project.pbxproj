@@ -28,6 +28,9 @@
 		BB8DE841160B3ADB00AFB5D7 /* keys6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8DE83F160B3ADB00AFB5D7 /* keys6.png */; };
 		BBAEBAFA1645F43E00076793 /* keys7.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF81645F43E00076793 /* keys7.png */; };
 		BBAEBAFB1645F43E00076793 /* keys7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF91645F43E00076793 /* keys7@2x.png */; };
+		BBF6195D17AF38900000A809 /* GammaControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6195C17AF38900000A809 /* GammaControl.m */; };
+		BBF6195F17AF38C50000A809 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF6195E17AF38C50000A809 /* CoreGraphics.framework */; };
+		BBF6196317AF39440000A809 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF6196217AF39440000A809 /* ApplicationServices.framework */; };
 		BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */; };
 		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
 		BBFE8906150DEBE5006D4F71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8905150DEBE5006D4F71 /* main.m */; };
@@ -58,6 +61,10 @@
 		BB8DE83F160B3ADB00AFB5D7 /* keys6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys6.png; sourceTree = "<group>"; };
 		BBAEBAF81645F43E00076793 /* keys7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys7.png; sourceTree = "<group>"; };
 		BBAEBAF91645F43E00076793 /* keys7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys7@2x.png"; sourceTree = "<group>"; };
+		BBF6195B17AF38900000A809 /* GammaControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GammaControl.h; sourceTree = "<group>"; };
+		BBF6195C17AF38900000A809 /* GammaControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GammaControl.m; sourceTree = "<group>"; };
+		BBF6195E17AF38C50000A809 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BBF6196217AF39440000A809 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveMyWindow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BBFE88FC150DEBE5006D4F71 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -81,6 +88,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF6196317AF39440000A809 /* ApplicationServices.framework in Frameworks */,
+				BBF6195F17AF38C50000A809 /* CoreGraphics.framework in Frameworks */,
 				BBFE891B150DEC42006D4F71 /* Carbon.framework in Frameworks */,
 				BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */,
 			);
@@ -92,6 +101,7 @@
 		BBFE88EA150DEBE4006D4F71 = {
 			isa = PBXGroup;
 			children = (
+				BBF6196217AF39440000A809 /* ApplicationServices.framework */,
 				BBFE88FF150DEBE5006D4F71 /* TheWindower */,
 				BBFE88F8150DEBE5006D4F71 /* Frameworks */,
 				BBFE88F6150DEBE5006D4F71 /* Products */,
@@ -109,6 +119,7 @@
 		BBFE88F8150DEBE5006D4F71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBF6195E17AF38C50000A809 /* CoreGraphics.framework */,
 				BBFE891A150DEC42006D4F71 /* Carbon.framework */,
 				BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */,
 				BBFE88FB150DEBE5006D4F71 /* Other Frameworks */,
@@ -135,6 +146,8 @@
 				BBFE890C150DEBE5006D4F71 /* AppDelegate.m */,
 				BBFE890E150DEBE5006D4F71 /* MainMenu.xib */,
 				BBFE8900150DEBE5006D4F71 /* Supporting Files */,
+				BBF6195B17AF38900000A809 /* GammaControl.h */,
+				BBF6195C17AF38900000A809 /* GammaControl.m */,
 			);
 			name = TheWindower;
 			path = WindowMover;
@@ -258,6 +271,7 @@
 				BB02265E150DFA0F00D05242 /* DDHotKeyCenter.m in Sources */,
 				BBFE8906150DEBE5006D4F71 /* main.m in Sources */,
 				BBFE890D150DEBE5006D4F71 /* AppDelegate.m in Sources */,
+				BBF6195D17AF38900000A809 /* GammaControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +353,7 @@
 		BBFE8914150DEBE5006D4F71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
 				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
@@ -351,11 +365,7 @@
 		BBFE8915150DEBE5006D4F71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-					x86_64,
-				);
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
 				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
