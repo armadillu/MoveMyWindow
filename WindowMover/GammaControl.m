@@ -60,9 +60,9 @@ float symmetricQuadraticBezier(float x, float bulge /*[-1..1]*/){
 		error_code = CGGetDisplayTransferByTable(
 													displays[i],
 													(CGTableCount) GAMMA_TABLE_SAMPLES,
-													&originalGammaTables[0][0][0],
-													&originalGammaTables[0][0][1],
-													&originalGammaTables[0][0][2],
+													&originalGammaTables[i][0][0],
+													&originalGammaTables[i][1][0],
+													&originalGammaTables[i][2][0],
 													&count
 												  );
 
@@ -79,7 +79,7 @@ float symmetricQuadraticBezier(float x, float bulge /*[-1..1]*/){
     CGGetActiveDisplayList(MAX_DISPLAYS, displays, &numDisplays);
 
     for(i=0; i<numDisplays; i++){
-		CGSetDisplayTransferByTable(displays[i], GAMMA_TABLE_SAMPLES, &originalGammaTables[0][0][0], &originalGammaTables[0][0][1], &originalGammaTables[0][0][2]);
+		CGSetDisplayTransferByTable(displays[i], GAMMA_TABLE_SAMPLES, &originalGammaTables[i][0][0], &originalGammaTables[i][1][0], &originalGammaTables[i][2][0]);
     }
 }
 
