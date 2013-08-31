@@ -8,6 +8,10 @@
 
 #import "GammaControl.h"
 
+//rgb
+static CGGammaValue originalGammaTables[MAX_DISPLAYS][3][GAMMA_TABLE_SAMPLES];
+
+
 //http://www.flong.com/texts/code/shapers_bez/
 float quadraticBezier (float x, float a, float b){
 	// adapted from BEZMATH.PS (1993)
@@ -39,6 +43,45 @@ float symmetricQuadraticBezier(float x, float bulge /*[-1..1]*/){
 
 @implementation GammaControl
 
+
++ (void)saveGammas{
+
+	CGDirectDisplayID displays[MAX_DISPLAYS];
+    uint32_t numDisplays;
+    uint32_t i;
+
+    CGGetActiveDisplayList(MAX_DISPLAYS, displays, &numDisplays);
+
+	//assuming 256! //TODO!
+	for(i=0; i<numDisplays; i++){
+
+		CGTableCount count;
+		CGDisplayErr error_code;
+		error_code = CGGetDisplayTransferByTable(
+													displays[i],
+													(CGTableCount) GAMMA_TABLE_SAMPLES,
+													&originalGammaTables[0][0][0],
+													&originalGammaTables[0][0][1],
+													&originalGammaTables[0][0][2],
+													&count
+												  );
+
+	}
+}
+
+
++(void) restoreGamma{
+
+	CGDirectDisplayID displays[MAX_DISPLAYS];
+    uint32_t numDisplays;
+    uint32_t i;
+
+    CGGetActiveDisplayList(MAX_DISPLAYS, displays, &numDisplays);
+
+    for(i=0; i<numDisplays; i++){
+		CGSetDisplayTransferByTable(displays[i], GAMMA_TABLE_SAMPLES, &originalGammaTables[0][0][0], &originalGammaTables[0][0][1], &originalGammaTables[0][0][2]);
+    }
+}
 
 
 +(void) setGamma:(float) newGamma{

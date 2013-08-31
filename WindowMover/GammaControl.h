@@ -7,7 +7,7 @@
 //
 
 #define MAX_DISPLAYS			12
-#define GAMMA_TABLE_SAMPLES		127
+#define GAMMA_TABLE_SAMPLES		256
 
 #ifndef MIN
 #define MIN(x,y) (((x) < (y)) ? (x) : (y))
@@ -20,8 +20,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface GammaControl : NSObject
 
+@interface GammaControl : NSObject{
+
+
+}
+
++ (void)saveGammas;
++ (void)restoreGamma;
 + (void)setGamma:(float)f;
 + (void)setGammaInverted:(float)f;
 

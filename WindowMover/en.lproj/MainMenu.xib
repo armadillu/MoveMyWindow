@@ -848,7 +848,7 @@ IERhdmUgRGVMb25nA</string>
 							<string key="NSContents"/>
 							<string key="NSCellIdentifier">_NS:9</string>
 							<reference key="NSControlView" ref="130825249"/>
-							<double key="NSMaxValue">50</double>
+							<double key="NSMaxValue">75</double>
 							<double key="NSMinValue">1</double>
 							<double key="NSValue">50</double>
 							<double key="NSAltIncValue">0.0</double>
@@ -1451,34 +1451,93 @@ IERhdmUgRGVMb25nA</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="changeOffset:">id</string>
+						<string key="growX:">NSEvent</string>
+						<string key="growXTrigger:">NSEvent</string>
+						<string key="growY:">NSEvent</string>
+						<string key="growYTrigger:">NSEvent</string>
 						<string key="moveDown:">NSEvent</string>
+						<string key="moveDownTrigger:">NSEvent</string>
 						<string key="moveLeft:">NSEvent</string>
+						<string key="moveLeftTrigger:">NSEvent</string>
 						<string key="moveRight:">NSEvent</string>
+						<string key="moveRightTrigger:">NSEvent</string>
 						<string key="moveUp:">NSEvent</string>
+						<string key="moveUpTrigger:">NSEvent</string>
+						<string key="pushDown:">NSEvent</string>
+						<string key="pushLeft:">NSEvent</string>
+						<string key="pushRight:">NSEvent</string>
 						<string key="pushUp:">NSEvent</string>
 						<string key="resetGamma:">id</string>
 						<string key="setGamma:">id</string>
 						<string key="setGammaInvert:">id</string>
+						<string key="shrinkX:">NSEvent</string>
+						<string key="shrinkXTrigger:">NSEvent</string>
+						<string key="shrinkY:">NSEvent</string>
+						<string key="shrinkYTrigger:">NSEvent</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="changeOffset:">
 							<string key="name">changeOffset:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="growX:">
+							<string key="name">growX:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="growXTrigger:">
+							<string key="name">growXTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="growY:">
+							<string key="name">growY:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="growYTrigger:">
+							<string key="name">growYTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
 						<object class="IBActionInfo" key="moveDown:">
 							<string key="name">moveDown:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveDownTrigger:">
+							<string key="name">moveDownTrigger:</string>
 							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="moveLeft:">
 							<string key="name">moveLeft:</string>
 							<string key="candidateClassName">NSEvent</string>
 						</object>
+						<object class="IBActionInfo" key="moveLeftTrigger:">
+							<string key="name">moveLeftTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
 						<object class="IBActionInfo" key="moveRight:">
 							<string key="name">moveRight:</string>
 							<string key="candidateClassName">NSEvent</string>
 						</object>
+						<object class="IBActionInfo" key="moveRightTrigger:">
+							<string key="name">moveRightTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
 						<object class="IBActionInfo" key="moveUp:">
 							<string key="name">moveUp:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="moveUpTrigger:">
+							<string key="name">moveUpTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="pushDown:">
+							<string key="name">pushDown:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="pushLeft:">
+							<string key="name">pushLeft:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="pushRight:">
+							<string key="name">pushRight:</string>
 							<string key="candidateClassName">NSEvent</string>
 						</object>
 						<object class="IBActionInfo" key="pushUp:">
@@ -1496,6 +1555,22 @@ IERhdmUgRGVMb25nA</string>
 						<object class="IBActionInfo" key="setGammaInvert:">
 							<string key="name">setGammaInvert:</string>
 							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkX:">
+							<string key="name">shrinkX:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkXTrigger:">
+							<string key="name">shrinkXTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkY:">
+							<string key="name">shrinkY:</string>
+							<string key="candidateClassName">NSEvent</string>
+						</object>
+						<object class="IBActionInfo" key="shrinkYTrigger:">
+							<string key="name">shrinkYTrigger:</string>
+							<string key="candidateClassName">NSEvent</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">

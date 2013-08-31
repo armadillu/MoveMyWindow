@@ -65,6 +65,7 @@ static bool amIAuthorized (){
 
 	[gammaMenuItem setView:gammaView];
 	[speedMenuItem setView:speedView];
+	[GammaControl saveGammas];
 }
 
 -(IBAction)setGamma:(id)sender;{
@@ -85,11 +86,8 @@ static bool amIAuthorized (){
 }
 
 -(IBAction)resetGamma:(id)sender;{
-	if([gammaInvertToggle state] == FALSE){
-		[GammaControl setGamma:0.5];
-	}else{
-		[GammaControl setGammaInverted:0.5];
-	}
+	[gammaInvertToggle setState:0];
+	[GammaControl restoreGamma];
 	[gammaSlider setFloatValue:0.5];
 }
 
