@@ -301,7 +301,6 @@
 							<string key="NSFrame">{{290, -6}, {200, 44}}</string>
 							<reference key="NSSuperview" ref="1056625355"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<string key="NSAntiCompressionPriority">{250, 750}</string>
 							<bool key="NSEnabled">YES</bool>
@@ -601,7 +600,7 @@ IERhdmUgRGVMb25nA</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67108864</int>
 								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Center Frontmost Window (Press 2x to go to next screen)</string>
+								<string key="NSContents">Fill All Screens with Frontmost Window</string>
 								<reference key="NSSupport" ref="24"/>
 								<reference key="NSBackgroundColor" ref="1040354181"/>
 								<object class="NSColor" key="NSTextColor">
@@ -707,7 +706,6 @@ IERhdmUgRGVMb25nA</string>
 						<string key="NSFrame">{{93, -1}, {58, 16}}</string>
 						<reference key="NSSuperview" ref="777450498"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="449196559">
@@ -865,7 +863,6 @@ IERhdmUgRGVMb25nA</string>
 						<string key="NSFrame">{{37, 20}, {96, 17}}</string>
 						<reference key="NSSuperview" ref="1070387276"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="740838468">

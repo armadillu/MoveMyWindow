@@ -666,41 +666,35 @@ float flip(float val) {
 		CFRelease(temp);
 
 		NSArray * screens = [NSScreen screens];
+		NSRect rect;
 		int index = -1;
 		int nextIndex = -1;
 		for (int i = 0; i < [screens count]; i++){
 			NSScreen * s = [screens objectAtIndex:i];
-			NSRect f = [s frame];
-			NSPoint p = NSMakePoint(windowPosition.x + windowSize.width / 2 , flip(windowPosition.y + windowSize.height / 2)  );
-			//NSLog(@"Point %@ in Rect %@", NSStringFromPoint(p), NSStringFromRect(f));
-			if (  NSPointInRect ( p , NSInsetRect(f, 0, 0 ) ) ){
-				index = i;
-			}
+			NSRect f = [s visibleFrame];
+			rect = NSUnionRect(rect, f);
 		}
 
-		if (index != -1){
+		NSPoint screenPos;
+		NSSize screenSize;
 
-			if (centeredRecently){ //user pressed 2 times in a row center, so jump center across screens
-				index = index + 1;
-				if (index >= [screens count]) {
-					index = 0;
-				}
-			}
+		screenPos.x = rect.origin.x;
+		screenPos.y = rect.origin.y;
+		screenSize.width = rect.size.width;
+		screenSize.height = rect.size.height;
+		AXError err;
 
-			NSScreen * screen = [screens objectAtIndex:index];
-			NSPoint screenPos = [screen visibleFrame].origin;
-			NSSize screenSize = [screen visibleFrame].size;
+		temp = AXValueCreate(kAXValueCGPointType, &screenPos);
+		err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
+		//printf("err at set position %d\n", err);
+		CFRelease(temp);
 
-			screenPos.x += screenSize.width * 0.5f - windowSize.width * 0.5f ;
-			screenPos.y = flip(screenSize.height + screenPos.y) + screenSize.height * 0.5 - windowSize.height * 0.5;
+		temp = AXValueCreate(kAXValueCGSizeType, &screenSize);
+		err = AXUIElementSetAttributeValue(frontMostWindow, kAXSizeAttribute, temp);
+		CFRelease(temp);
 
-			AXError err;
-			temp = AXValueCreate(kAXValueCGPointType, &screenPos);
-			err = AXUIElementSetAttributeValue(frontMostWindow, kAXPositionAttribute, temp);
-			//printf("err at set position %d\n", err);
-			CFRelease(temp);
 
-		}
+
 		CFRelease(frontMostWindow);
 		CFRelease(frontMostApp);
 
