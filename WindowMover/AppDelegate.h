@@ -71,6 +71,4 @@
 - (void) registerKeys;
 - (void) unregisterKeys;
 
-@property (assign) IBOutlet NSMenu *menu;
-
 @end
