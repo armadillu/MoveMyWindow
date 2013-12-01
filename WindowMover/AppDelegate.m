@@ -20,6 +20,17 @@ static AXUIElementRef getFrontMostApp (){
     return AXUIElementCreateApplication(pid);
 }
 
+void openAccessibilitySystemPrefs(){
+	NSAppleScript* appleScript = [[NSAppleScript alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"openAccessibility" withExtension:@"scpt" ] error:nil];
+	bool c = [appleScript compileAndReturnError:nil];
+	NSDictionary *errDict = nil;
+	bool r = [appleScript executeAndReturnError:&errDict];
+	if(!r){
+		NSLog(@"openAccessibilitySystemPrefs: %d %d >> %@", c, r, errDict);
+	}
+	[appleScript release];
+}
+
 
 static bool amIAuthorized (){
     if (AXAPIEnabled() != 0) {
@@ -37,19 +48,18 @@ static bool amIAuthorized (){
      * ourselves trusted, then restart... I'll skip this here for
      * simplicity.
      */
+	openAccessibilitySystemPrefs();
     return false;
 }
 
 
 @implementation AppDelegate
 
-
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
 	_statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength] retain];
     [_statusItem setHighlightMode:YES];
     [_statusItem setEnabled:YES];
-    [_statusItem setMenu:menu];
+    [_statusItem setMenu:_menu];
 	[_statusItem setTarget:self];	
 	[_statusItem setImage:[NSImage imageNamed:@"menuIcon"]];
 	[self registerKeys];

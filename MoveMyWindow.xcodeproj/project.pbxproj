@@ -24,12 +24,13 @@
 		BB6595DF160B299500972A6B /* keys4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6595D7160B299500972A6B /* keys4@2x.png */; };
 		BB6595E2160B2C4600972A6B /* keys5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6595E0160B2C4600972A6B /* keys5@2x.png */; };
 		BB6595E3160B2C4600972A6B /* keys5.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6595E1160B2C4600972A6B /* keys5.png */; };
+		BB7EA615184B98E100048F7A /* openAccessibility.scpt in Resources */ = {isa = PBXBuildFile; fileRef = BB7EA614184B98E100048F7A /* openAccessibility.scpt */; };
+		BB7EA617184B994600048F7A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB7EA616184B994600048F7A /* QuartzCore.framework */; };
 		BB8DE840160B3ADB00AFB5D7 /* keys6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8DE83E160B3ADB00AFB5D7 /* keys6@2x.png */; };
 		BB8DE841160B3ADB00AFB5D7 /* keys6.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8DE83F160B3ADB00AFB5D7 /* keys6.png */; };
 		BBAEBAFA1645F43E00076793 /* keys7.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF81645F43E00076793 /* keys7.png */; };
 		BBAEBAFB1645F43E00076793 /* keys7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBAEBAF91645F43E00076793 /* keys7@2x.png */; };
 		BBF6195D17AF38900000A809 /* GammaControl.m in Sources */ = {isa = PBXBuildFile; fileRef = BBF6195C17AF38900000A809 /* GammaControl.m */; };
-		BBF6195F17AF38C50000A809 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF6195E17AF38C50000A809 /* CoreGraphics.framework */; };
 		BBF6196317AF39440000A809 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBF6196217AF39440000A809 /* ApplicationServices.framework */; };
 		BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */; };
 		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
@@ -57,13 +58,14 @@
 		BB6595D7160B299500972A6B /* keys4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys4@2x.png"; sourceTree = "<group>"; };
 		BB6595E0160B2C4600972A6B /* keys5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys5@2x.png"; sourceTree = "<group>"; };
 		BB6595E1160B2C4600972A6B /* keys5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys5.png; sourceTree = "<group>"; };
+		BB7EA614184B98E100048F7A /* openAccessibility.scpt */ = {isa = PBXFileReference; lastKnownFileType = file; path = openAccessibility.scpt; sourceTree = "<group>"; };
+		BB7EA616184B994600048F7A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = ../../../../../../Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = "<group>"; };
 		BB8DE83E160B3ADB00AFB5D7 /* keys6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys6@2x.png"; sourceTree = "<group>"; };
 		BB8DE83F160B3ADB00AFB5D7 /* keys6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys6.png; sourceTree = "<group>"; };
 		BBAEBAF81645F43E00076793 /* keys7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keys7.png; sourceTree = "<group>"; };
 		BBAEBAF91645F43E00076793 /* keys7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keys7@2x.png"; sourceTree = "<group>"; };
 		BBF6195B17AF38900000A809 /* GammaControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GammaControl.h; sourceTree = "<group>"; };
 		BBF6195C17AF38900000A809 /* GammaControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GammaControl.m; sourceTree = "<group>"; };
-		BBF6195E17AF38C50000A809 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		BBF6196217AF39440000A809 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		BBFE88F5150DEBE5006D4F71 /* MoveMyWindow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveMyWindow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -88,8 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB7EA617184B994600048F7A /* QuartzCore.framework in Frameworks */,
 				BBF6196317AF39440000A809 /* ApplicationServices.framework in Frameworks */,
-				BBF6195F17AF38C50000A809 /* CoreGraphics.framework in Frameworks */,
 				BBFE891B150DEC42006D4F71 /* Carbon.framework in Frameworks */,
 				BBFE88FA150DEBE5006D4F71 /* Cocoa.framework in Frameworks */,
 			);
@@ -119,7 +121,7 @@
 		BBFE88F8150DEBE5006D4F71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BBF6195E17AF38C50000A809 /* CoreGraphics.framework */,
+				BB7EA616184B994600048F7A /* QuartzCore.framework */,
 				BBFE891A150DEC42006D4F71 /* Carbon.framework */,
 				BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */,
 				BBFE88FB150DEBE5006D4F71 /* Other Frameworks */,
@@ -144,6 +146,7 @@
 				BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */,
 				BBFE890B150DEBE5006D4F71 /* AppDelegate.h */,
 				BBFE890C150DEBE5006D4F71 /* AppDelegate.m */,
+				BB7EA614184B98E100048F7A /* openAccessibility.scpt */,
 				BBFE890E150DEBE5006D4F71 /* MainMenu.xib */,
 				BBFE8900150DEBE5006D4F71 /* Supporting Files */,
 				BBF6195B17AF38900000A809 /* GammaControl.h */,
@@ -251,6 +254,7 @@
 				BB6595DC160B299500972A6B /* keys2@2x.png in Resources */,
 				BB6595DD160B299500972A6B /* keys3@2x.png in Resources */,
 				BB6595DE160B299500972A6B /* keys2.png in Resources */,
+				BB7EA615184B98E100048F7A /* openAccessibility.scpt in Resources */,
 				BB6595DF160B299500972A6B /* keys4@2x.png in Resources */,
 				BB6595E2160B2C4600972A6B /* keys5@2x.png in Resources */,
 				BB6595E3160B2C4600972A6B /* keys5.png in Resources */,
@@ -353,11 +357,13 @@
 		BBFE8914150DEBE5006D4F71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
 				PRODUCT_NAME = MoveMyWindow;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -365,11 +371,13 @@
 		BBFE8915150DEBE5006D4F71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "WindowMover/MoveMyWindow-Info.plist";
 				PRODUCT_NAME = MoveMyWindow;
+				SDKROOT = macosx10.7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
