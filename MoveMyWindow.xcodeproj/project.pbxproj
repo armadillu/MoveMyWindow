@@ -103,7 +103,6 @@
 		BBFE88EA150DEBE4006D4F71 = {
 			isa = PBXGroup;
 			children = (
-				BBF6196217AF39440000A809 /* ApplicationServices.framework */,
 				BBFE88FF150DEBE5006D4F71 /* TheWindower */,
 				BBFE88F8150DEBE5006D4F71 /* Frameworks */,
 				BBFE88F6150DEBE5006D4F71 /* Products */,
@@ -121,6 +120,7 @@
 		BBFE88F8150DEBE5006D4F71 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BBF6196217AF39440000A809 /* ApplicationServices.framework */,
 				BB7EA616184B994600048F7A /* QuartzCore.framework */,
 				BBFE891A150DEC42006D4F71 /* Carbon.framework */,
 				BBFE88F9150DEBE5006D4F71 /* Cocoa.framework */,
@@ -357,7 +357,7 @@
 		BBFE8914150DEBE5006D4F71 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
 				GCC_VERSION = "";
@@ -371,7 +371,7 @@
 		BBFE8915150DEBE5006D4F71 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WindowMover/MoveMyWindow-Prefix.pch";
 				GCC_VERSION = "";
