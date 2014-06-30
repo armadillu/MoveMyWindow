@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment version="1060" defaultVersion="1050" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -22,6 +22,8 @@
                 <menuItem isSeparatorItem="YES" id="1470"/>
                 <menuItem title="Speed" id="1457"/>
                 <menuItem isSeparatorItem="YES" id="1469"/>
+                <menuItem title="Acceleration" id="U47-q1-YMn"/>
+                <menuItem isSeparatorItem="YES" id="EcH-7Z-fvr"/>
                 <menuItem title="Gamma" id="1454"/>
                 <menuItem isSeparatorItem="YES" id="732">
                     <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -35,6 +37,9 @@
         </menu>
         <customObject id="494" customClass="AppDelegate">
             <connections>
+                <outlet property="accMenuItem" destination="U47-q1-YMn" id="s11-WN-ejm"/>
+                <outlet property="accSlider" destination="ULj-5I-wia" id="tA9-Kn-6dO"/>
+                <outlet property="accView" destination="RzD-kD-VYS" id="3ls-f4-rzd"/>
                 <outlet property="gammaInvertToggle" destination="1471" id="1474"/>
                 <outlet property="gammaMenuItem" destination="1454" id="1456"/>
                 <outlet property="gammaSlider" destination="1450" id="1468"/>
@@ -128,7 +133,7 @@ Uses DDHotKeyCenter by Dave DeLong</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView id="1431">
-                                    <rect key="frame" x="18" y="3" width="331" height="80"/>
+                                    <rect key="frame" x="18" y="5" width="331" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="keys5" id="1432"/>
                                 </imageView>
@@ -146,7 +151,7 @@ Uses DDHotKeyCenter by Dave DeLong</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView id="1434">
-                                    <rect key="frame" x="18" y="3" width="331" height="80"/>
+                                    <rect key="frame" x="18" y="5" width="331" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="keys4" id="1435"/>
                                 </imageView>
@@ -164,7 +169,7 @@ Uses DDHotKeyCenter by Dave DeLong</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView id="1437">
-                                    <rect key="frame" x="18" y="3" width="331" height="80"/>
+                                    <rect key="frame" x="18" y="5" width="331" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="keys6" id="1438"/>
                                 </imageView>
@@ -182,7 +187,7 @@ Uses DDHotKeyCenter by Dave DeLong</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView id="1440">
-                                    <rect key="frame" x="18" y="3" width="331" height="80"/>
+                                    <rect key="frame" x="18" y="5" width="331" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" image="keys7" id="1441"/>
                                 </imageView>
@@ -256,9 +261,32 @@ Uses DDHotKeyCenter by Dave DeLong</string>
                 <slider verticalHuggingPriority="750" id="1417">
                     <rect key="frame" x="18" y="3" width="134" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                    <sliderCell key="cell" alignment="left" minValue="1" maxValue="75" doubleValue="50" tickMarkPosition="below" sliderType="linear" id="1420"/>
+                    <sliderCell key="cell" alignment="left" minValue="1" maxValue="150" doubleValue="50" tickMarkPosition="below" sliderType="linear" id="1420"/>
                     <connections>
                         <action selector="changeOffset:" target="494" id="1426"/>
+                    </connections>
+                </slider>
+            </subviews>
+        </customView>
+        <customView id="RzD-kD-VYS">
+            <rect key="frame" x="0.0" y="0.0" width="170" height="37"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField verticalHuggingPriority="750" id="bBk-dW-nMC">
+                    <rect key="frame" x="17" y="20" width="135" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Window Acceleration" id="oG0-5m-BJQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <slider verticalHuggingPriority="750" id="ULj-5I-wia">
+                    <rect key="frame" x="18" y="3" width="134" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <sliderCell key="cell" alignment="left" minValue="0.0040000000000000001" maxValue="0.10000000000000001" doubleValue="0.10000000000000001" tickMarkPosition="below" sliderType="linear" id="F3B-jw-YPh"/>
+                    <connections>
+                        <action selector="changeAcc:" target="494" id="GOk-tH-FW5"/>
                     </connections>
                 </slider>
             </subviews>

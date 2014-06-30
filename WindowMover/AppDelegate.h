@@ -38,6 +38,8 @@
 	IBOutlet NSMenu * menu;
 	IBOutlet NSSlider * offsetSlider;
 	IBOutlet NSSlider * gammaSlider;
+	IBOutlet NSSlider * accSlider;
+
 
 	IBOutlet NSButton * gammaInvertToggle;
 
@@ -47,8 +49,12 @@
 	IBOutlet NSView * speedView;
 	IBOutlet NSMenuItem* speedMenuItem;
 
-	float offset;
-	float offsetNow;
+	IBOutlet NSView * accView;
+	IBOutlet NSMenuItem* accMenuItem;
+
+	double offset;
+	double offsetNow;
+	double acc;
 
 	float timeOutTime;
 
@@ -62,6 +68,8 @@
 -(IBAction)pushUp:(NSEvent*)sender;
 
 -(IBAction)changeOffset:(id)sender;
+-(IBAction)changeAcc:(id)sender;
+
 
 -(IBAction)setGamma:(id)sender;
 -(IBAction)setGammaInvert:(id)sender;

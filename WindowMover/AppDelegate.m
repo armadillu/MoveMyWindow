@@ -66,8 +66,10 @@ static bool amIAuthorized (){
 	lastAbsoluteMove = nil;
 	timeoutTimer = nil;
 	offset = 25; //defaults
+	acc = 0.033;
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
+	[accSlider setFloatValue:acc];
 	currentAction = NOTHING;
 	centeredRecently = centeredResizedRecently = fulledRecently = halfedRecently = false;
 	updateTimer = nil;
@@ -75,6 +77,7 @@ static bool amIAuthorized (){
 
 	[gammaMenuItem setView:gammaView];
 	[speedMenuItem setView:speedView];
+	[accMenuItem setView:accView];
 	[GammaControl saveGammas];
 }
 
@@ -103,7 +106,7 @@ static bool amIAuthorized (){
 
 -(void)update:(id)whatever{
 	//NSLog(@"update");
-	offsetNow += offset * 0.033f;
+	offsetNow += offset * acc;
 	if (offsetNow > offset) offsetNow = offset;
 
 	switch (currentAction) {
@@ -141,8 +144,11 @@ static bool amIAuthorized (){
 	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
 	if ( [def stringForKey:@"offset"] ){
 		offset = [def floatForKey:@"offset"] ;
-		if (offset > 50) offset = 50;
+		if (offset > 150) offset = 150;
 		if (offset < 1) offset = 1;
+
+		acc = [def floatForKey:@"acc"] ;
+
 	}
 }
 
@@ -152,6 +158,13 @@ static bool amIAuthorized (){
     [super dealloc];
 }
 
+
+-(IBAction)changeAcc:(id)sender{
+	acc = [sender doubleValue];
+	NSUserDefaults * def = [NSUserDefaults standardUserDefaults];
+	[def setFloat:acc forKey:@"acc"];
+	[def synchronize];
+}
 
 -(IBAction)changeOffset:(id)sender{
 	offset = [sender floatValue];
