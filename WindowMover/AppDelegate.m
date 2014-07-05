@@ -66,7 +66,6 @@ static bool amIAuthorized (){
 	lastAbsoluteMove = nil;
 	timeoutTimer = nil;
 	offset = 25; //defaults
-	acc = 0.033;
 	[self loadPrefs];
 	[offsetSlider setFloatValue:offset];
 	[accSlider setFloatValue:acc];
@@ -149,6 +148,12 @@ static bool amIAuthorized (){
 
 		acc = [def floatForKey:@"acc"] ;
 
+	}
+
+	if ( [def stringForKey:@"acc"] ){
+		acc = [def floatForKey:@"acc"] ;
+	}else{
+		acc = 0.04;
 	}
 }
 
