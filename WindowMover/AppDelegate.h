@@ -10,6 +10,16 @@
 #import "DDHotKeyCenter.h"
 #include "GammaControl.h"
 
+#include <vector>
+#include <algorithm>
+
+struct ScreenPos{
+	NSScreen* s;
+	float x;
+	bool operator < (const ScreenPos& a) const{
+		return x < a.x;
+	}
+};
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>{
 
@@ -61,6 +71,7 @@
 	enum WIN_ACTION currentAction;
 }
 
+-(NSArray *) sortedScreens;
 -(IBAction)moveUp:(NSEvent*)sender;
 -(IBAction)moveDown:(NSEvent*)sender;
 -(IBAction)moveRight:(NSEvent*)sender;

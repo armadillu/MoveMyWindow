@@ -247,6 +247,26 @@ static bool amIAuthorized (){
     CFRelease(frontMostApp);
 }
 
+
+-(NSArray *) sortedScreens{
+
+	NSArray * screens = [NSScreen screens];
+	std::vector<ScreenPos> v;
+
+	for (NSScreen * s in screens){
+		ScreenPos p;
+		p.s = s;
+		p.x = [s frame].origin.x;
+		v.push_back(p);
+	}
+	std::sort(v.begin(), v.end());
+	NSMutableArray * s = [NSMutableArray arrayWithCapacity:4];
+	for(int i = 0; i < v.size(); i++){
+		[s addObject: v[i].s];
+	}
+	return s;
+}
+
 -(void)moveWindow:(NSDictionary*)offset{
 
 	if (timeoutTimer != nil) [timeoutTimer invalidate];
@@ -299,7 +319,7 @@ static bool amIAuthorized (){
 		
 	}else{	//move N, S, E, W inside that screen
 
-		NSArray * screens = [NSScreen screens];
+		NSArray * screens = [self sortedScreens];
 		int index = -1;
 		int nextIndex = -1;
 		for (int i = 0; i < [screens count]; i++){
@@ -321,6 +341,11 @@ static bool amIAuthorized (){
 			
 			NSScreen * screen = [screens objectAtIndex:index];		
 			NSScreen * nextScreen = [screens objectAtIndex:nextIndex];
+			if([[offset objectForKey:@"abosolutePosition"] isEqualToString:@"W"]){
+				int nextIndex = index -1;
+				if (nextIndex < 0) nextIndex = [screens count] - 1;
+				nextScreen = [screens objectAtIndex:nextIndex];
+			}
 			
 			if (lastAbsoluteMove!= nil) [lastAbsoluteMove release];
 
@@ -505,7 +530,7 @@ float flip(float val) {
 		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
 		CFRelease(temp);
 
-		NSArray * screens = [NSScreen screens];
+		NSArray * screens = [self sortedScreens];
 		int index = -1;
 
 		for (int i = 0; i < [screens count]; i++){
@@ -597,7 +622,7 @@ float flip(float val) {
 		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
 		CFRelease(temp);
 
-		NSArray * screens = [NSScreen screens];
+		NSArray * screens = [self sortedScreens];
 		int index = -1;
 
 		for (int i = 0; i < [screens count]; i++){
@@ -693,7 +718,7 @@ float flip(float val) {
 		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
 		CFRelease(temp);
 
-		NSArray * screens = [NSScreen screens];
+		NSArray * screens = [self sortedScreens];
 		int index = -1;
 		int nextIndex = -1;
 		for (int i = 0; i < [screens count]; i++){
@@ -775,7 +800,7 @@ float flip(float val) {
 		AXValueGetValue(temp, kAXValueCGPointType, &windowPosition);
 		CFRelease(temp);
 
-		NSArray * screens = [NSScreen screens];
+		NSArray * screens = [self sortedScreens];
 		int index = -1;
 		int nextIndex = -1;
 		for (int i = 0; i < [screens count]; i++){
@@ -918,7 +943,8 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
 	  [NSNumber numberWithInt:offsetNow], @"x", 
-	  [NSNumber numberWithInt:00], @"y", nil]
+	  [NSNumber numberWithInt:0], @"y",
+	  nil]
 			   afterDelay:0.00];
 }
 
@@ -927,7 +953,8 @@ float flip(float val) {
 	 [NSDictionary dictionaryWithObjectsAndKeys: 
 	  [NSNumber numberWithBool:true], @"relative", 
 	  [NSNumber numberWithInt:-offsetNow], @"x",
-	  [NSNumber numberWithInt:0], @"y", nil]
+	  [NSNumber numberWithInt:0], @"y",
+	  nil]
 			   afterDelay:0.00];
 }
 
@@ -980,7 +1007,8 @@ float flip(float val) {
 		[self performSelector:@selector(moveWindow:) withObject:
 		 [NSDictionary dictionaryWithObjectsAndKeys:
 		  [NSNumber numberWithBool:false], @"relative",
-		  @"E", @"abosolutePosition", nil]
+		  @"E", @"abosolutePosition",
+		  nil]
 				   afterDelay:0.00];
 	}
 }
@@ -990,7 +1018,8 @@ float flip(float val) {
 		[self performSelector:@selector(moveWindow:) withObject:
 		 [NSDictionary dictionaryWithObjectsAndKeys:
 		  [NSNumber numberWithBool:false], @"relative",
-		  @"W", @"abosolutePosition", nil]
+		  @"W", @"abosolutePosition",
+		  nil]
 				   afterDelay:0.00];
 	}
 }

@@ -36,7 +36,7 @@
 		BBFE8904150DEBE5006D4F71 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8902150DEBE5006D4F71 /* InfoPlist.strings */; };
 		BBFE8906150DEBE5006D4F71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE8905150DEBE5006D4F71 /* main.m */; };
 		BBFE890A150DEBE5006D4F71 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BBFE8908150DEBE5006D4F71 /* Credits.rtf */; };
-		BBFE890D150DEBE5006D4F71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBFE890C150DEBE5006D4F71 /* AppDelegate.m */; };
+		BBFE890D150DEBE5006D4F71 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = BBFE890C150DEBE5006D4F71 /* AppDelegate.mm */; };
 		BBFE8910150DEBE5006D4F71 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBFE890E150DEBE5006D4F71 /* MainMenu.xib */; };
 		BBFE891B150DEC42006D4F71 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBFE891A150DEC42006D4F71 /* Carbon.framework */; };
 /* End PBXBuildFile section */
@@ -78,7 +78,7 @@
 		BBFE8907150DEBE5006D4F71 /* MoveMyWindow-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoveMyWindow-Prefix.pch"; sourceTree = "<group>"; };
 		BBFE8909150DEBE5006D4F71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		BBFE890B150DEBE5006D4F71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		BBFE890C150DEBE5006D4F71 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BBFE890C150DEBE5006D4F71 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		BBFE890F150DEBE5006D4F71 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BBFE891A150DEC42006D4F71 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		BBFE8921150DF53C006D4F71 /* DDHotKeyCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDHotKeyCenter.h; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				BBFE8921150DF53C006D4F71 /* DDHotKeyCenter.h */,
 				BBFE8922150DF53C006D4F71 /* DDHotKeyCenter.m */,
 				BBFE890B150DEBE5006D4F71 /* AppDelegate.h */,
-				BBFE890C150DEBE5006D4F71 /* AppDelegate.m */,
+				BBFE890C150DEBE5006D4F71 /* AppDelegate.mm */,
 				BB7EA614184B98E100048F7A /* openAccessibility.scpt */,
 				BBFE890E150DEBE5006D4F71 /* MainMenu.xib */,
 				BBFE8900150DEBE5006D4F71 /* Supporting Files */,
@@ -274,7 +274,7 @@
 			files = (
 				BB02265E150DFA0F00D05242 /* DDHotKeyCenter.m in Sources */,
 				BBFE8906150DEBE5006D4F71 /* main.m in Sources */,
-				BBFE890D150DEBE5006D4F71 /* AppDelegate.m in Sources */,
+				BBFE890D150DEBE5006D4F71 /* AppDelegate.mm in Sources */,
 				BBF6195D17AF38900000A809 /* GammaControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
